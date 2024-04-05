@@ -1,118 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>x.dev - Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div id="root">
-    <!-- Navigation -->
-    <nav id="nav_bar">
-      <h2>x.dev</h2>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Projects</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>x.dev - Portfolio</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+    <link rel="shortcut icon" href="public/hi.svg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="root">
+      <!-- Navigation -->
+      <nav id="nav_bar">
+        <h2>x.dev</h2>
+        <ul id="nav_links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Contact</a></li>
+          <i class="ri-menu-3-line"></i>
+        </ul>
 
-    <!-- Hero Section -->
-    <section class="hero_section bg_color">
-      <div id="hero">
-        <div id="hero_text">
-          <h1>
-            <img src="public/hi.svg" alt="Hi icon">Hello, I am<br />Md Zaki Hussain.
-          </h1>
-          <p>An aspiring Software Engineer based in Bihar, India. 📍</p>
-          <span>
-            <a href="https://leetcode.com/professorx2001/" target="_blank">
-              <img src="public/leetcode.svg" alt="Leetcode icon" class="svg_size">
-            </a>
-            <a href="https://www.linkedin.com/in/mdzakihussain/" target="_blank">
-              <img src="public/linkedin.svg" alt="LinkedIn icon" class="svg_size">
-            </a>
-            <a href="https://github.com/professorx2001" target="_blank">
-              <img src="public/github.svg" alt="GitHub icon" class="svg_size">
-            </a>
-            <button><img src="public/resume.svg" alt="Resume icon" class="svg_size"></button>
-          </span>
-          <div class="tech_stack svg_size">
-            <img src="https://skillicons.dev/icons?i=c,cpp,java,html,css,js,git,github,vscode,apple" alt="Skill icons">
-          </div>
-        </div>
-        <div id="hero_img">
-          <img src="public/my.jpg" alt="My picture">
-        </div>
-      </div>
-    </section>
+      </nav>
+      
 
-    <!-- About Section -->
-    <section class="about_section">
-      <div id="about_img">
-        <img src="public/100Problems.jpeg" alt="100 Problems">
-      </div>
-      <div id="about_text">
-        <h4>Software Engineer</h4>
-        <p>
-          Hi there, I am currently pursuing B.Tech(2024) in Computer Science and Engineering from Nalanda College of Engineering.<br><br>
-          I love to utilize my coding skills to design and implement practical, software solutions. I enjoy my time by solving Leetcode problems.
-          My current stack is C/C++ and Javascript. I am also learning Backend development right now. Please wait new projects are on the way. 🤠
-        </p>
-      </div>
-    </section>
+      <!-- Hero Section -->
+      <section class="hero_section bg_color">
+        <div id="hero" class="container">
+          <div id="hero_text">
+            <h1>
+              <img src="public/hi.svg" alt="Hi icon"/>
+              Hello, I am<br />
+              Md Zaki Hussain.
+            </h1>
+            <p>An aspiring Software Engineer based in Bihar, India. 📍</p>
+            <span>
+              <a href="https://leetcode.com/professorx2001/" target="_blank">
+                <img
+                  src="public/leetcode.svg"
+                  alt="Leetcode icon"
+                  class="svg_size"
+                />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/mdzakihussain/"
+                target="_blank"
+              >
+                <img
+                  src="public/linkedin.svg"
+                  alt="LinkedIn icon"
+                  class="svg_size"
+                />
+              </a>
+              <a href="https://github.com/professorx2001" target="_blank">
+                <img
+                  src="public/github.svg"
+                  alt="GitHub icon"
+                  class="svg_size"
+                />
+              </a>
+              <a href="https://github.com/professorx2001" target="_blank">
+                <img
+                  src="public/resume.svg"
+                  alt="Resume"
+                  class="svg_size"
+                />
+              </a>
+            </span>
 
-    <!-- Projects Section -->
-    <section id="projects" class="bg_color">
-      <div>
-        <h2 class="new-projects">New projects coming soon.. 🤠</h2>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact_section">
-      <div class="contact make_col">
-        <div id="contact_text">
-          <h3>CONTACT</h3>
-          <p>Don't be shy! Hit me up! 👇</p>
-        </div>
-        <div id="contact_location" class="make_row">
-          <div id="location" class="make_col">
-            <div class="make_row">
-              <span class="mid">
-                <img class="svg_size" src="public/location.svg" alt="Location icon">
-              </span>
-              <div>
-                <h3>Location</h3>
-                <p>Bihar, India</p>
-              </div>
+            <div class="tech_stack">
+              <img
+                src="https://skillicons.dev/icons?i=c,cpp"
+                alt="Skill icons"
+              />
+              <img
+                src="https://skillicons.dev/icons?i=html,css"
+                alt="Skill icons"
+              />
+              <img
+                src="https://skillicons.dev/icons?i=js,java"
+                alt="Skill icons"
+              />
+              <img
+                src="https://skillicons.dev/icons?i=git,github"
+                alt="Skill icons"
+              />
+              <img
+                src="https://skillicons.dev/icons?i=vscode,apple"
+                alt="Skill icons"
+              />
             </div>
           </div>
-          <div>
-            <div id="mail" class="make_row">
-              <span class="mid">
-                <img class="svg_size" src="public/gmail.svg" alt="Gmail icon">
-              </span>
-              <div>
-                <h3>Mail</h3>
-                <a href="mailto:mdzakihusain@gmail.com">mdzakihusain@gmail.com</a>
-              </div>
-            </div>
+          <div id="hero_img">
+            <img src="public/my.jpg" alt="My picture" />
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Footer -->
-    <footer id="footer" class="bg_color">
-      <h3>
-        Copyright © 2024. All rights are reserved
-      </h3>
-    </footer>
-  </div>
-</body>
+      <section class="about_section">
+        <div class="container space_between">
+          <div class="about_img">
+            <img src="public/100Problems.jpeg" alt="leetcode 100Problems jpeg">
+          </div>
+
+          <div class="about_text">
+            <h1>Software Engineer</h1>
+            <p>Hi there, I am currently pursuing B.Tech(2024) in Computer Science and Engineering from Nalanda College of Engineering.
+              <br>
+            I love to utilize my coding skills to design and implement practical, softwaresolutions. I enjoy my time by solving Leetcode problems. My current stack is C/C++ andJavascript. I am also learning Backend development right now. Please wait new projectsare on the way. 🤠</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="project_section">
+        <div class="container">
+            <h2>New Projects coming soon... 🤠</h2>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <h3>Copyright © 2024. All rights are reserved.</h3>
+      </footer>
+      
+    </div>
+  </body>
 </html>
