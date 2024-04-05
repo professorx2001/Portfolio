@@ -220,6 +220,7 @@ nav i{
 }
 
 .footer h3 {
+    padding: 20px;
     color: white;
     /* max-width: 70vw; */ /* use it when you add form in footer*/
     font-size: 1.2rem;
