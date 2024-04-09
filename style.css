@@ -287,14 +287,16 @@ nav i{
   @media screen and (max-width: 900px) {
     .footer_section .container {
       flex-direction: row;
-      /* align-items: center; */
-      align-items: flex-start;
-      justify-content: end;
+      align-items: flex-end;
     }
-    
-    #contactForm button {
-      margin-left: 0;
-      margin-top: 10px;
+    #contactForm {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    #contactForm button , h3{
+      margin-left: 10px;
+      margin-top: 5px;
     }
     
     .column {
