@@ -1,3 +1,5 @@
+
+//click on navbar icons to get to that section
 const navLinks = document.querySelectorAll("#nav_links li a");
 
   navLinks.forEach(function(link) {
@@ -12,6 +14,7 @@ const navLinks = document.querySelectorAll("#nav_links li a");
       }
     });
   });
+
 
 
   
