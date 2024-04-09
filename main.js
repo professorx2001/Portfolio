@@ -1,6 +1,17 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const navBar = document.getElementById('nav_bar');
-    navBar.addEventListener('click', function() {
-        navBar.classList.toggle('show_menu');
+const navLinks = document.querySelectorAll("#nav_links li a");
+
+  navLinks.forEach(function(link) {
+    link.addEventListener("click", function(event) {
+      event.preventDefault(); // Prevent default behavior of the anchor link
+      
+      const targetId = this.getAttribute("href").substring(1);
+      const targetSection = document.getElementById(targetId);
+      
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: "smooth" });
+      }
     });
-});
+  });
+
+
+  
