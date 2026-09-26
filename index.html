@@ -37,6 +37,7 @@
         <ul id="nav_links" class="nav-links">
           <li><a href="#Home" class="active"><i class="ri-home-4-line"></i> Home</a></li>
           <li><a href="#Experience"><i class="ri-briefcase-4-line"></i> Experience</a></li>
+          <li><a href="#Education"><i class="ri-graduation-cap-line"></i> Education</a></li>
           <li><a href="#Projects"><i class="ri-folder-keyhole-line"></i> Projects</a></li>
           <li><a href="#Skills"><i class="ri-cpu-line"></i> Skills</a></li>
           <li><a href="#Contact"><i class="ri-mail-send-line"></i> Contact</a></li>
@@ -64,50 +65,28 @@
           </div>
 
           <h1 class="hero-title">
-            Exploring Data Realms <br />
-            <!-- <span class="gradient-text">AWS Data Engineer & Cloud Architect</span> -->
+            <span class="hero-tagline">Exploring Data Realms</span>
+            <span class="gradient-text">AWS Data Engineer & Cloud Architect</span>
           </h1>
-
-          <div class="hero-subtitle">
-            <p class="hero-intro">
-              AWS Data Engineer building scalable cloud data infrastructure across the enterprise lifecycle.
-            </p>
-
-            <ul class="hero-highlights">
-              <li>
-                <strong>Warehouse Modernization:</strong> Converted legacy SQL Server stored procedures to distributed
-                Spark SQL on AWS Glue; implemented SCD1/SCD2 star schemas on PostgreSQL billion-row tables.
-              </li>
-              <li>
-                <strong>Event-Driven Pipelines:</strong> Engineered an event-driven, near-real-time pipeline to automate
-                secure cross-account DynamoDB replication.
-              </li>
-              <li>
-                <strong>Lakehouse Optimization:</strong> Re-architected sequential Apache Hudi pipelines on S3 into
-                parallel OCC writes with partitioned storage, eliminating concurrency locks and cutting runtimes from
-                <span class="text-highlight">2.5h to under 20 minutes</span>.
-              </li>
-            </ul>
-          </div>
 
           <!-- Key Performance Metrics Grid -->
           <div class="metrics-strip">
             <!-- Card 1: Data Scale (Warehouse Migration) -->
             <div class="metric-card">
               <div class="metric-value gradient-text">1B+</div>
-              <div class="metric-label">Row Scale in PostgreSQL</div>
+              <div class="metric-label">PostgreSQL Records Managed</div>
             </div>
 
             <!-- Card 2: Performance Tuning (Lakehouse Optimization) -->
             <div class="metric-card">
               <div class="metric-value gradient-text">85%+</div>
-              <div class="metric-label">Lakehouse Write Reduction</div>
+              <div class="metric-label">ETL Write Latency Cut</div>
             </div>
 
             <!-- Card 3: Throughput Speedup (Apache Hudi OCC) -->
             <div class="metric-card">
               <div class="metric-value gradient-text">7.5x</div>
-              <div class="metric-label">Pipeline Speedup (2.5h → 20m)</div>
+              <div class="metric-label">Pipeline Speedup (2.5h → &lt;20m)</div>
             </div>
 
             <!-- Card 4: Operational Delivery (Production Experience) -->
@@ -225,7 +204,7 @@
                   </div>
                 </div>
                 <div class="job-duration">
-                  <span class="time-badge"><i class="ri-calendar-line"></i> April 2025 – Present</span>
+                  <span class="time-badge"><i class="ri-calendar-line"></i> May 2025 – Present</span>
                   <div class="award-pill"><i class="ri-award-line"></i> Star Performer Award (Dec 2025)</div>
                 </div>
               </div>
@@ -233,34 +212,84 @@
               <div class="experience-body">
                 <ul class="bullet-list">
                   <li>
-                    <strong>Enterprise Data Pipelines:</strong> Designed, deployed, and maintained production AWS ETL
-                    pipelines for enterprise financial data platforms under Aegon UK.
+                    <strong>Warehouse Migration:</strong> Decommissioned legacy SQL
+                    Server data warehouse by refactoring stored procedures into distributed Spark SQL/PySpark Glue jobs,
+                    building Star Schema models (SCD1, SCD2, Non-SCD) on PostgreSQL and orchestrating modular workflows
+                    via nested AWS Step Functions.
                   </li>
                   <li>
-                    <strong>Multi-TB Processing Engine:</strong> Engineered distributed PySpark and AWS Glue jobs to
-                    seamlessly process multi-terabyte datasets across Amazon S3, Apache Hudi, DynamoDB, and PostgreSQL.
+                    <strong>Event-Driven Cross-Account Replication:</strong> Engineered an event-driven, near-real-time
+                    pipeline using EventBridge and Lambda to detect DynamoDB timestamp deltas, running JSON
+                    config-driven Glue/Spark transformations over Apache Hudi tables and replicating data to
+                    cross-account DynamoDB targets via IAM role assumption and Secrets Manager.
                   </li>
                   <li>
-                    <strong>Operational Excellence & SLAs:</strong> Partnered with cross-functional infrastructure,
-                    security, and BI reporting teams to remediate complex failures, tune execution buffers, and enforce
-                    strict data availability SLAs.
+                    <strong>Direct JDBC Ingestion & Throughput Tuning:</strong> Decoupled downstream analytics from
+                    delayed S3 batch workflows by routing AWS Glue directly to PostgreSQL fed by AWS DMS; applied
+                    predicate pushdowns, JDBC fetch size tuning, and partition bounds to eliminate staging lag.
                   </li>
                   <li>
-                    <strong>Star Performer Recognition:</strong> Awarded TCS <strong>Star Performer Award (December
-                      2025)</strong> for high-impact technical deliveries, operational reliability during releases, and
-                    proactive pipeline modernization initiatives.
+                    <strong>Apache Hudi Lakehouse Concurrency Optimization:</strong> Re-architected sequential S3 Apache
+                    Hudi pipelines into parallel OCC writes using DynamoDB as a distributed lock provider, executing
+                    zero-downtime historical data backfills and slashing execution time from 2.5 hours to under 20
+                    minutes (85%+ speedup).
                   </li>
                 </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                <div class="experience-tech-tags">
-                  <span class="tech-tag">AWS Glue</span>
-                  <span class="tech-tag">Apache Hudi</span>
-                  <span class="tech-tag">PySpark</span>
-                  <span class="tech-tag">Amazon S3</span>
-                  <span class="tech-tag">AWS Lambda</span>
-                  <span class="tech-tag">DynamoDB</span>
-                  <span class="tech-tag">PostgreSQL</span>
-                  <span class="tech-tag">EventBridge</span>
+    <!-- Education Section -->
+    <section id="Education" class="section-padding education-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag"><i class="ri-graduation-cap-line"></i> Academic Background</span>
+          <h2 class="section-title">Education</h2>
+          <p class="section-description">Strong foundation in Computer Science & Engineering.</p>
+        </div>
+
+        <div class="education-card-wrapper">
+          <div class="timeline-item glass-panel education-featured-card">
+            <div class="timeline-badge education-badge">
+              <i class="ri-graduation-cap-line"></i>
+            </div>
+            <div class="timeline-content">
+              <div class="experience-header">
+                <div>
+                  <h3 class="company-name" style="font-size: 1.5rem; color: #fff;">Nalanda College of Engineering,
+                    Chandi</h3>
+                  <div class="job-title-wrapper" style="margin-top: 6px;">
+                    <span class="job-role" style="font-size: 1.1rem; color: var(--accent-cyan); font-weight: 700;">
+                      <i class="ri-book-open-line"></i> B.Tech in Computer Science and Engineering
+                    </span>
+                  </div>
+                </div>
+                <div class="job-duration" style="align-items: flex-end;">
+                  <span class="time-badge" style="font-size: 0.95rem; font-weight: 600;"><i
+                      class="ri-calendar-line"></i> 2020 – 2024</span>
+                  <div class="degree-pill"><i class="ri-award-line"></i> Graduated 2024</div>
+                </div>
+              </div>
+
+              <div class="experience-body" style="margin-top: 16px;">
+                <p style="color: var(--text-secondary); line-height: 1.7; font-size: 1rem; margin-bottom: 20px;">
+                  Completed with 8.13/10 CGPA.
+                </p>
+
+                <div class="education-highlights-grid">
+                  <div class="edu-highlight-item">
+                    <i class="ri-code-s-slash-line"></i>
+                    <span><strong>Core CS Foundations:</strong> C/C++, OOPs, Data Structures & Algorithms (DSA), SQL,
+                      Web Development.</span>
+                  </div>
+                  <div class="edu-highlight-item">
+                    <i class="ri-cpu-line"></i>
+                    <span><strong>Systems & Engineering:</strong> Database Managment Systems, Operating Systems,
+                      Computer Networks, Software Engineering.</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -313,7 +342,9 @@
                 </div>
                 <div class="achievement-item">
                   <i class="ri-checkbox-circle-fill"></i>
-                  <span><strong>Dimensional Modeling & Incremental ETL:</strong> Developed Star Schema architectures and built automated batch workflows to process incremental deltas across SCD Type 1, SCD Type 2, and Non-SCD tables.</span>
+                  <span><strong>Dimensional Modeling & Incremental ETL:</strong> Developed Star Schema architectures and
+                    built automated batch workflows to process incremental deltas across SCD Type 1, SCD Type 2, and
+                    Non-SCD tables.</span>
                 </div>
                 <div class="achievement-item">
                   <i class="ri-checkbox-circle-fill"></i>
@@ -703,6 +734,7 @@
         <div class="footer-links">
           <a href="#Home">Home</a>
           <a href="#Experience">Experience</a>
+          <a href="#Education">Education</a>
           <a href="#Projects">Projects</a>
           <a href="#Skills">Skills</a>
         </div>
