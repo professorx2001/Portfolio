@@ -340,8 +340,11 @@ ul {
    6. HERO SECTION
    -------------------------------------------------------------------------- */
 .hero-section {
-  padding-top: 150px;
-  padding-bottom: 90px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 100px;
+  padding-bottom: 60px;
   position: relative;
 }
 
@@ -371,12 +374,21 @@ ul {
   font-size: 1.1rem;
 }
 
+.hero-tagline {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+
 .hero-title {
-  font-size: 3.2rem;
+  font-size: 4.2rem;
   font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -1px;
-  margin-bottom: 20px;
+  line-height: 1.12;
+  letter-spacing: -1.8px;
+  margin-bottom: 28px;
 }
 
 .hero-subtitle {
@@ -709,6 +721,24 @@ ul {
   box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
 }
 
+.timeline-badge.education-badge {
+  background: linear-gradient(135deg, #10b981 0%, #00f2fe 100%);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+.degree-pill {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: var(--accent-emerald);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .experience-header {
   display: flex;
   justify-content: space-between;
@@ -799,6 +829,57 @@ ul {
 
 .bullet-list strong {
   color: var(--text-primary);
+}
+
+/* Education Section Specific Styles */
+.education-section {
+  position: relative;
+}
+
+.education-card-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.education-featured-card {
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.08);
+  transition: all var(--transition-normal);
+}
+
+.education-featured-card:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.18);
+  transform: translateY(-4px);
+}
+
+.education-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.edu-highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.edu-highlight-item i {
+  font-size: 1.25rem;
+  color: var(--accent-emerald);
+  margin-top: 2px;
+  flex-shrink: 0;
 }
 
 .experience-tech-tags {
@@ -1339,7 +1420,7 @@ ul {
 
 @media (max-width: 768px) {
   .hero-title {
-    font-size: 2.3rem;
+    font-size: 3rem;
   }
 
   .nav-links {
