@@ -3,15 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>x.dev - Portfolio</title>
+    <title>Md Zaki Hussain | AWS Data Engineer</title>
+    <meta
+      name="description"
+      content="Portfolio of Md Zaki Hussain - AWS Data Engineer specializing in Apache Hudi Data Lakes, PySpark ETL, Serverless Cloud Architectures, and High-Throughput Analytics."
+    />
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <!-- RemixIcon CDN -->
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
       rel="stylesheet"
@@ -20,166 +24,639 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Background Decorator Elements -->
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="grid-overlay"></div>
+
+    <!-- Main Wrapper -->
     <div id="root">
-      <!-- Navigation -->
+      <!-- Navigation Bar -->
       <nav id="nav_bar">
-        <h2>x.dev</h2>
-        <ul id="nav_links">
-          <li><a href="#Home">Home</a></li>
-          <li><a href="#About">About</a></li>
-          <li><a href="#Project">Projects</a></li>
-          <li><a href="#Contact">Contact</a></li>
-          <i id="menu" class="ri-menu-3-line"></i>
-        </ul>
+        <div class="nav-container">
+          <a href="#Home" class="brand-logo">
+            <span class="logo-accent">&lt;</span>Zaki<span class="logo-highlight">.AWS</span><span class="logo-accent">/&gt;</span>
+          </a>
+
+          <ul id="nav_links" class="nav-links">
+            <li><a href="#Home" class="active"><i class="ri-home-4-line"></i> Home</a></li>
+            <li><a href="#Experience"><i class="ri-briefcase-4-line"></i> Experience</a></li>
+            <li><a href="#Projects"><i class="ri-folder-keyhole-line"></i> Projects</a></li>
+            <li><a href="#Skills"><i class="ri-cpu-line"></i> Skills</a></li>
+            <li><a href="#Contact"><i class="ri-mail-send-line"></i> Contact</a></li>
+          </ul>
+
+          <div class="nav-cta">
+            <a href="public/Resume.pdf" target="_blank" download="Md_Zaki_Hussain_Resume.pdf" class="btn btn-outline btn-sm">
+              <i class="ri-file-download-line"></i> Resume
+            </a>
+            <button id="mobile_toggle" class="mobile-toggle" aria-label="Toggle menu">
+              <i class="ri-menu-3-line"></i>
+            </button>
+          </div>
+        </div>
       </nav>
 
       <!-- Hero Section -->
-      <section id="Home" class="hero_section bg_color">
-        <div id="hero" class="container">
-          <div id="hero_text">
-            <h1>
-              <img src="public/hi.svg" alt="Hi icon" />
-              Hello, I am<br />
-              Md Zaki Hussain.
+      <section id="Home" class="hero-section">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <div class="award-badge glowing-badge">
+              <i class="ri-award-fill"></i>
+              <span>Star Performer Awarded • TCS AWS Data Engineer</span>
+            </div>
+
+            <h1 class="hero-title">
+              Architecting High-Throughput <br />
+              <span class="gradient-text">Cloud Data Lakes & ETL Pipelines</span>
             </h1>
-            <p>An aspiring Software Engineer based in Bihar, India. 📍</p>
-            <span>
-              <a href="https://leetcode.com/professorx2001/" target="_blank">
-                <img
-                  src="public/leetcode.svg"
-                  alt="Leetcode icon"
-                  class="svg_size"
-                />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/mdzakihussain/"
-                target="_blank"
-              >
-                <img
-                  src="public/linkedin.svg"
-                  alt="LinkedIn icon"
-                  class="svg_size"
-                />
-              </a>
-              <a href="https://github.com/professorx2001" target="_blank">
-                <img
-                  src="public/github.svg"
-                  alt="GitHub icon"
-                  class="svg_size"
-                />
-              </a>
-              <a href="public/Resume.pdf" target="_blank" download="Reume.pdf">
-                <img src="public/resume.svg" alt="Resume" class="svg_size" />
-              </a>
-            </span>
 
-            <div class="tech_stack">
-              <img
-                src="https://skillicons.dev/icons?i=c,cpp"
-                alt="Skill icons"
-              />
-              <img
-                src="https://skillicons.dev/icons?i=html,css"
-                alt="Skill icons"
-              />
-              <img
-                src="https://skillicons.dev/icons?i=js,java"
-                alt="Skill icons"
-              />
-              <img
-                src="https://skillicons.dev/icons?i=git,github"
-                alt="Skill icons"
-              />
-              <img
-                src="https://skillicons.dev/icons?i=vscode,apple"
-                alt="Skill icons"
-              />
-            </div>
-          </div>
-          <div id="hero_img">
-            <img src="public/my.jpg" alt="My picture" />
-          </div>
-        </div>
-      </section>
-
-      <section id="About" class="about_section">
-        <div class="container space_between">
-          <div class="about_img">
-            <img
-              src="public/100Problems.jpeg"
-              alt="leetcode 100Problems jpeg"
-            />
-          </div>
-
-          <div class="about_text">
-            <h1>Software Engineer</h1>
-            <p>
-              Hi there, I am currently pursuing B.Tech(2024) in Computer Science
-              and Engineering from Nalanda College of Engineering, Chandi(Nalanda).
-              <br /> <br>
-              I Love to utilize my coding skills to design and implement
-              practical, software solutions. I enjoy my time by solving Leetcode
-              problems. My current stack is C/C++ and Javascript. I am also
-              learning Backend development right now. Please wait, new
-              projects are on the way. 🤠
+            <p class="hero-subtitle">
+              AWS Data Engineer at <strong>Tata Consultancy Services (TCS)</strong> specializing in distributed PySpark ETL, 
+              <strong>Apache Hudi</strong> transactional data lakes, and event-driven serverless architectures. 
+              Proven track record of engineering high-impact optimizations, including an 
+              <span class="text-highlight">85%+ runtime reduction (2.5h to &lt;20m)</span> on concurrent Hudi writes.
             </p>
-          </div>
-        </div>
-      </section>
 
-      <section id="Project" class="project_section">
-        <div class="container">
-          <h2>New Projects coming soon... 🤠</h2>
-        </div>
-      </section>
-
-      <footer id="Contact" class="footer_section">
-        <div class="container">
-          <div>
-            <form action="" id="contactForm">
-              <h3>Contact Me!</h3>
-              <div class="column">
-                <div>
-                  <div>
-                    <input type="text" id="name" name="name" placeholder="Full Name*" required>
-                  </div>
-                  <div>
-                    <input type="email" id="email" name="email" placeholder="Email*" required>
-                  </div>
-                </div>
-                <div>
-                  <div>
-                    <textarea id="message" name="message" placeholder="Message."></textarea>
-                  </div>
-                </div>
+            <!-- Key Performance Metrics Grid -->
+            <div class="metrics-strip">
+              <div class="metric-card">
+                <div class="metric-value gradient-text">85%+</div>
+                <div class="metric-label">Runtime Reduction on Hudi Writes</div>
               </div>
-
-              <div>
-                <button id="sendMail">Submit</button>
+              <div class="metric-card">
+                <div class="metric-value gradient-text">7.5x</div>
+                <div class="metric-label">Pipeline Speedup (2.5h → 20m)</div>
               </div>
-            </form>
-          </div>
-
-          <div id="social_links_section">
-            <div id="social_links">
-              <span>
-                <a href="https://www.linkedin.com/in/mdzakihussain/" target="_blank">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="rgba(255,255,255,1)"><path d="M6.94048 4.99993C6.94011 5.81424 6.44608 6.54702 5.69134 6.85273C4.9366 7.15845 4.07187 6.97605 3.5049 6.39155C2.93793 5.80704 2.78195 4.93715 3.1105 4.19207C3.43906 3.44699 4.18654 2.9755 5.00048 2.99993C6.08155 3.03238 6.94097 3.91837 6.94048 4.99993ZM7.00048 8.47993H3.00048V20.9999H7.00048V8.47993ZM13.3205 8.47993H9.34048V20.9999H13.2805V14.4299C13.2805 10.7699 18.0505 10.4299 18.0505 14.4299V20.9999H22.0005V13.0699C22.0005 6.89993 14.9405 7.12993 13.2805 10.1599L13.3205 8.47993Z"></path></svg>
-                </a>
-                <a href="https://www.instagram.com/professorx2001/" target="_blank">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="rgba(255,255,255,1)"><path d="M12.001 9C10.3436 9 9.00098 10.3431 9.00098 12C9.00098 13.6573 10.3441 15 12.001 15C13.6583 15 15.001 13.6569 15.001 12C15.001 10.3427 13.6579 9 12.001 9ZM12.001 7C14.7614 7 17.001 9.2371 17.001 12C17.001 14.7605 14.7639 17 12.001 17C9.24051 17 7.00098 14.7629 7.00098 12C7.00098 9.23953 9.23808 7 12.001 7ZM18.501 6.74915C18.501 7.43926 17.9402 7.99917 17.251 7.99917C16.5609 7.99917 16.001 7.4384 16.001 6.74915C16.001 6.0599 16.5617 5.5 17.251 5.5C17.9393 5.49913 18.501 6.0599 18.501 6.74915ZM12.001 4C9.5265 4 9.12318 4.00655 7.97227 4.0578C7.18815 4.09461 6.66253 4.20007 6.17416 4.38967C5.74016 4.55799 5.42709 4.75898 5.09352 5.09255C4.75867 5.4274 4.55804 5.73963 4.3904 6.17383C4.20036 6.66332 4.09493 7.18811 4.05878 7.97115C4.00703 9.0752 4.00098 9.46105 4.00098 12C4.00098 14.4745 4.00753 14.8778 4.05877 16.0286C4.0956 16.8124 4.2012 17.3388 4.39034 17.826C4.5591 18.2606 4.7605 18.5744 5.09246 18.9064C5.42863 19.2421 5.74179 19.4434 6.17187 19.6094C6.66619 19.8005 7.19148 19.9061 7.97212 19.9422C9.07618 19.9939 9.46203 20 12.001 20C14.4755 20 14.8788 19.9934 16.0296 19.9422C16.8117 19.9055 17.3385 19.7996 17.827 19.6106C18.2604 19.4423 18.5752 19.2402 18.9074 18.9085C19.2436 18.5718 19.4445 18.2594 19.6107 17.8283C19.8013 17.3358 19.9071 16.8098 19.9432 16.0289C19.9949 14.9248 20.001 14.5389 20.001 12C20.001 9.52552 19.9944 9.12221 19.9432 7.97137C19.9064 7.18906 19.8005 6.66149 19.6113 6.17318C19.4434 5.74038 19.2417 5.42635 18.9084 5.09255C18.573 4.75715 18.2616 4.55693 17.8271 4.38942C17.338 4.19954 16.8124 4.09396 16.0298 4.05781C14.9258 4.00605 14.5399 4 12.001 4ZM12.001 2C14.7176 2 15.0568 2.01 16.1235 2.06C17.1876 2.10917 17.9135 2.2775 18.551 2.525C19.2101 2.77917 19.7668 3.1225 20.3226 3.67833C20.8776 4.23417 21.221 4.7925 21.476 5.45C21.7226 6.08667 21.891 6.81333 21.941 7.8775C21.9885 8.94417 22.001 9.28333 22.001 12C22.001 14.7167 21.991 15.0558 21.941 16.1225C21.8918 17.1867 21.7226 17.9125 21.476 18.55C21.2218 19.2092 20.8776 19.7658 20.3226 20.3217C19.7668 20.8767 19.2076 21.22 18.551 21.475C17.9135 21.7217 17.1876 21.89 16.1235 21.94C15.0568 21.9875 14.7176 22 12.001 22C9.28431 22 8.94514 21.99 7.87848 21.94C6.81431 21.8908 6.08931 21.7217 5.45098 21.475C4.79264 21.2208 4.23514 20.8767 3.67931 20.3217C3.12348 19.7658 2.78098 19.2067 2.52598 18.55C2.27848 17.9125 2.11098 17.1867 2.06098 16.1225C2.01348 15.0558 2.00098 14.7167 2.00098 12C2.00098 9.28333 2.01098 8.94417 2.06098 7.8775C2.11014 6.8125 2.27848 6.0875 2.52598 5.45C2.78014 4.79167 3.12348 4.23417 3.67931 3.67833C4.23514 3.1225 4.79348 2.78 5.45098 2.525C6.08848 2.2775 6.81348 2.11 7.87848 2.06C8.94514 2.0125 9.28431 2 12.001 2Z"></path></svg>
-                </a>
-                <a href="https://twitter.com/professorx2001" target="_blank">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="rgba(233,244,234,1)"><path d="M15.3499 5.55005C13.7681 5.55005 12.4786 6.81809 12.4504 8.39658L12.4223 9.97162C12.4164 10.3029 12.143 10.5667 11.8117 10.5608C11.7881 10.5604 11.7646 10.5586 11.7413 10.5554L10.1805 10.3426C8.12699 10.0625 6.15883 9.11736 4.27072 7.54411C3.67275 10.8538 4.84 13.1472 7.65342 14.916L9.40041 16.0142C9.68095 16.1906 9.7654 16.561 9.58903 16.8415C9.54861 16.9058 9.49636 16.9619 9.43504 17.0067L7.84338 18.1696C8.78973 18.229 9.68938 18.1875 10.435 18.0387C15.1526 17.0973 18.2897 13.547 18.2897 7.69109C18.2897 7.213 17.2774 5.55005 15.3499 5.55005ZM10.4507 8.3609C10.4983 5.69584 12.6735 3.55005 15.3499 3.55005C16.7132 3.55005 17.9465 4.10683 18.8348 5.0054C19.5462 5.00005 20.1514 5.17991 21.5035 4.35967C21.1693 6.00005 21.0034 6.71201 20.2897 7.69109C20.2897 15.3326 15.5926 19.0489 10.8264 20C7.5587 20.6522 2.80646 19.5815 1.44531 18.1587C2.13874 18.1054 4.95928 17.802 6.58895 16.6092C5.20994 15.6987 -0.278631 12.4681 3.32772 3.78642C5.02119 5.76307 6.73797 7.10855 8.47807 7.82286C9.63548 8.29798 9.91978 8.2885 10.4507 8.3609Z"></path></svg>
-                </a>
-              </span>
-              <h3>Copyright © 2024. All rights are reserved.</h3>
+              <div class="metric-card">
+                <div class="metric-value gradient-text">100%</div>
+                <div class="metric-label">Zero-Regression Serverless Fleet</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value gradient-text">TCS ⭐</div>
+                <div class="metric-label">Star Performer (Dec 2025)</div>
+              </div>
             </div>
+
+            <div class="hero-actions">
+              <a href="#Projects" class="btn btn-primary">
+                <i class="ri-rocket-2-line"></i> Explore Projects
+              </a>
+              <a href="#Contact" class="btn btn-secondary">
+                <i class="ri-chat-1-line"></i> Get In Touch
+              </a>
+            </div>
+
+            <!-- Social Links Strip -->
+            <div class="social-strip">
+              <span class="social-label">Connect & Code:</span>
+              <div class="social-icons">
+                <a href="https://leetcode.com/professorx2001/" target="_blank" title="LeetCode" class="social-btn">
+                  <img src="public/leetcode.svg" alt="LeetCode" />
+                </a>
+                <a href="https://www.linkedin.com/in/mdzakihussain/" target="_blank" title="LinkedIn" class="social-btn">
+                  <img src="public/linkedin.svg" alt="LinkedIn" />
+                </a>
+                <a href="https://github.com/professorx2001" target="_blank" title="GitHub" class="social-btn">
+                  <img src="public/github.svg" alt="GitHub" />
+                </a>
+                <a href="https://twitter.com/professorx2001" target="_blank" title="Twitter/X" class="social-btn">
+                  <img src="public/twitter.svg" alt="Twitter" />
+                </a>
+                <a href="public/Resume.pdf" target="_blank" download="Resume.pdf" title="Resume PDF" class="social-btn">
+                  <img src="public/resume.svg" alt="Resume" />
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Hero Graphic / Profile Card -->
+          <div class="hero-visual">
+            <div class="profile-card-wrapper">
+              <div class="profile-glow-ring"></div>
+              <div class="profile-card glass-panel">
+                <div class="profile-avatar-container">
+                  <img src="public/my.jpg" alt="Md Zaki Hussain" class="profile-img" />
+                  <div class="status-indicator" title="Currently Active at TCS (Aegon UK)">
+                    <span class="pulse-dot"></span> Active AWS Engineer
+                  </div>
+                </div>
+
+                <div class="profile-details">
+                  <h3>Md Zaki Hussain</h3>
+                  <p class="role-tag"><i class="ri-cloud-line"></i> AWS Data Engineer @ TCS</p>
+                  <p class="location-tag"><i class="ri-map-pin-2-line"></i> Client: Aegon UK | India</p>
+
+                  <div class="stack-pills">
+                    <span class="pill"><i class="ri-fire-line"></i> PySpark</span>
+                    <span class="pill"><i class="ri-database-2-line"></i> Apache Hudi</span>
+                    <span class="pill"><i class="ri-amazon-line"></i> AWS Glue</span>
+                    <span class="pill"><i class="ri-server-line"></i> Lambda</span>
+                  </div>
+                </div>
+
+                <!-- Floating Code Snippet Card -->
+                <div class="floating-code-card glass-panel">
+                  <div class="code-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="code-title">hudi_occ_config.py</span>
+                  </div>
+                  <pre><code><span class="code-keyword">hudi_options</span> = {
+  <span class="code-str">'hoodie.write.concurrency.mode'</span>: <span class="code-val">'optimistic_concurrency_control'</span>,
+  <span class="code-str">'hoodie.cleaner.policy.failed.writes'</span>: <span class="code-val">'LAZY'</span>,
+  <span class="code-str">'hoodie.write.lock.provider'</span>: <span class="code-val">'DynamoDBLockProvider'</span>
+}</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Work Experience Section -->
+      <section id="Experience" class="section-padding experience-section">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="section-tag"><i class="ri-history-line"></i> Career Journey</span>
+            <h2 class="section-title">Professional Experience</h2>
+            <p class="section-description">Building mission-critical, enterprise cloud data solutions at scale.</p>
+          </div>
+
+          <div class="experience-timeline">
+            <!-- TCS Card -->
+            <div class="timeline-item glass-panel">
+              <div class="timeline-badge">
+                <i class="ri-building-4-line"></i>
+              </div>
+              <div class="timeline-content">
+                <div class="experience-header">
+                  <div>
+                    <h3 class="company-name">Tata Consultancy Services (TCS)</h3>
+                    <div class="job-title-wrapper">
+                      <span class="job-role">AWS Data Engineer</span>
+                      <span class="client-tag"><i class="ri-global-line"></i> Client: Aegon UK</span>
+                    </div>
+                  </div>
+                  <div class="job-duration">
+                    <span class="time-badge"><i class="ri-calendar-line"></i> April 2025 – Present</span>
+                    <div class="award-pill"><i class="ri-award-line"></i> Star Performer Award (Dec 2025)</div>
+                  </div>
+                </div>
+
+                <div class="experience-body">
+                  <ul class="bullet-list">
+                    <li>
+                      <strong>Enterprise Data Pipelines:</strong> Designed, deployed, and maintained production AWS ETL pipelines for enterprise financial data platforms under Aegon UK.
+                    </li>
+                    <li>
+                      <strong>Multi-TB Processing Engine:</strong> Engineered distributed PySpark and AWS Glue jobs to seamlessly process multi-terabyte datasets across Amazon S3, Apache Hudi, DynamoDB, and PostgreSQL.
+                    </li>
+                    <li>
+                      <strong>Operational Excellence & SLAs:</strong> Partnered with cross-functional infrastructure, security, and BI reporting teams to remediate complex failures, tune execution buffers, and enforce strict data availability SLAs.
+                    </li>
+                    <li>
+                      <strong>Star Performer Recognition:</strong> Awarded TCS <strong>Star Performer Award (December 2025)</strong> for high-impact technical deliveries, operational reliability during releases, and proactive pipeline modernization initiatives.
+                    </li>
+                  </ul>
+
+                  <div class="experience-tech-tags">
+                    <span class="tech-tag">AWS Glue</span>
+                    <span class="tech-tag">Apache Hudi</span>
+                    <span class="tech-tag">PySpark</span>
+                    <span class="tech-tag">Amazon S3</span>
+                    <span class="tech-tag">AWS Lambda</span>
+                    <span class="tech-tag">DynamoDB</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">EventBridge</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Enterprise Projects Section -->
+      <section id="Projects" class="section-padding projects-section">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="section-tag"><i class="ri-folder-chart-line"></i> Impact-Driven Work</span>
+            <h2 class="section-title">Featured Enterprise Projects</h2>
+            <p class="section-description">Real-world production engineering challenges, architectures, and measurable results.</p>
+          </div>
+
+          <!-- Project Filter Tabs -->
+          <div class="project-filters">
+            <button class="filter-btn active" data-filter="all">All Projects (5)</button>
+            <button class="filter-btn" data-filter="lakehouse">Data Lakes & Hudi</button>
+            <button class="filter-btn" data-filter="etl">ETL & Warehousing</button>
+            <button class="filter-btn" data-filter="serverless">Serverless & Cloud</button>
+          </div>
+
+          <!-- Projects Grid -->
+          <div class="projects-grid">
+            
+            <!-- Project 1 -->
+            <div class="project-card glass-panel" data-category="lakehouse">
+              <div class="project-banner">
+                <div class="project-type-tag"><i class="ri-flashlight-line"></i> High-Performance Optimization</div>
+                <div class="impact-chip glow-text"><i class="ri-line-chart-line"></i> 85%+ Speedup</div>
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">Apache Hudi Lakehouse Concurrency & Performance Optimization</h3>
+                <div class="project-role-tag"><i class="ri-user-settings-line"></i> Role: AWS Data Engineer</div>
+                
+                <p class="project-summary">
+                  Re-engineered a mission-critical Amazon S3 Apache Hudi pipeline where multiple concurrent ingestion streams writing different primary key sequences to a shared table suffered severe write contention, reducing execution time from 2.5 hours to under 20 minutes.
+                </p>
+
+                <div class="key-achievements">
+                  <div class="achievement-item">
+                    <i class="ri-checkbox-circle-fill"></i>
+                    <span><strong>OCC & Physical Partitioning:</strong> Designed a table partitioning scheme combining Optimistic Concurrency Control (OCC) to eliminate table-level write locks.</span>
+                  </div>
+                  <div class="achievement-item">
+                    <i class="ri-checkbox-circle-fill"></i>
+                    <span><strong>Zero-Downtime Migration:</strong> Authored backfill scripts to migrate historical datasets into the new Hudi schema without data corruption.</span>
+                  </div>
+                  <div class="achievement-item">
+                    <i class="ri-checkbox-circle-fill"></i>
+                    <span><strong>Parallel Glue Scheduling:</strong> Restructured Glue jobs to execute concurrent parallel writes safely into the shared Hudi target table.</span>
+                  </div>
+                </div>
+
+                <div class="project-metric-banner">
+                  <div class="metric-unit">
+                    <span class="val">2.5 hrs → 20 mins</span>
+                    <span class="lbl">Over 7.5x Performance Gain delivering data hours ahead of SLA</span>
+                  </div>
+                </div>
+
+                <div class="project-stack">
+                  <span class="stack-tag">Apache Hudi</span>
+                  <span class="stack-tag">Amazon S3</span>
+                  <span class="stack-tag">AWS Glue</span>
+                  <span class="stack-tag">PySpark</span>
+                  <span class="stack-tag">OCC</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card glass-panel" data-category="lakehouse serverless">
+              <div class="project-banner">
+                <div class="project-type-tag"><i class="ri-shield-keyhole-line"></i> Near-Real-Time & Security</div>
+                <div class="impact-chip"><i class="ri-refresh-line"></i> CDC & Cross-Account</div>
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">Gemini Block 4: NRT & Cross-Account Replication Architecture</h3>
+                <div class="project-role-tag"><i class="ri-user-settings-line"></i> Role: AWS Data Engineer</div>
+
+                <p class="project-summary">
+                  Architected and deployed two production-grade pipelines in the Gemini ecosystem: an event-driven near-real-time ingestion engine and a secure cross-account database replication framework.
+                </p>
+
+                <div class="key-achievements">
+                  <div class="achievement-item">
+                    <i class="ri-checkbox-circle-fill"></i>
+                    <span><strong>Event-Driven Microservices:</strong> EventBridge rules monitor DynamoDB timestamp updates to trigger Lambda microservices evaluating delta arrivals.</span>
+                  </div>
+                  <div class="achievement-item">
+                    <i class="ri-checkbox-circle-fill"></i>
+                    <span><strong>Config-Driven ETL (JSON DAGs):</strong> Developed a JSON-driven transformation framework in Glue defining modular `Read`, `Transform`, and `Write` execution stages.</span>
+                  </div>
+                  <div class="achievement-item">
+                    <i class="ri-checkbox-circle-fill"></i>
+                    <span><strong>Cross-Account Security:</strong> Configured cross-account IAM role assumption and Secrets Manager integration to replicate processed data across isolated accounts.</span>
+                  </div>
+                </div>
+
+                <div class="project-stack">
+                  <span class="stack-tag">AWS Glue</span>
+                  <span class="stack-tag">AWS Lambda</span>
+                  <span class="stack-tag">DynamoDB</span>
+                  <span class="stack-tag">Amazon S3</span>
+                  <span class="stack-tag">Apache Hudi</span>
+                  <span class="stack-tag">EventBridge</span>
+                  <span class="stack-tag">IAM Secrets Manager</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card glass-panel" data-category="etl">
+              <div class="project-banner">
+                <div class="project-type-tag"><i class="ri-database-2-line"></i> Warehouse Modernization</div>
+                <div class="impact-chip"><i class="ri-exchange-box-line"></i> CDC & Star Schema</div>
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">Enterprise "Mini Warehouse" Migration: SQL Server to PostgreSQL</h3>
+                <div class="project-role-tag"><i class="ri-user-settings-line"></i> Role: AWS Data Engineer</div>
+
+                <p class="project-summary">
+                  Decommissioned an legacy on-premise SQL Server data warehouse and built a centralized AWS PostgreSQL "Mini Warehouse" to unblock downstream business intelligence reporting.
+                </p>
+
+                <div class="key-achievements">
+                  <div class="achievement-item">
+                    <i class="ri-checkbox-circle-fill"></i>
+                    <span><strong>Stored Procedure Modernization:</strong> Refactored hundreds of lines of legacy SQL Server stored procedures into distributed Spark SQL & PySpark Glue jobs.</span>
+                  </div>
+                  <div class="achievement-item">
+                    <i class="ri-checkbox-circle-fill"></i>
+                    <span><strong>Dimensional Modeling & CDC:</strong> Implemented Star Schema modeling with automated CDC pipelines handling SCD Type 1, SCD Type 2, and Non-SCD.</span>
+                  </div>
+                  <div class="achievement-item">
+                    <i class="ri-checkbox-circle-fill"></i>
+                    <span><strong>Idempotent Upserts:</strong> Programmed Glue routines reading delta files and executing idempotent upserts into PostgreSQL reporting tables.</span>
+                  </div>
+                </div>
+
+                <div class="project-stack">
+                  <span class="stack-tag">AWS Glue</span>
+                  <span class="stack-tag">Spark SQL</span>
+                  <span class="stack-tag">PySpark</span>
+                  <span class="stack-tag">PostgreSQL</span>
+                  <span class="stack-tag">SQL Server</span>
+                  <span class="stack-tag">Star Schema</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card glass-panel" data-category="serverless">
+              <div class="project-banner">
+                <div class="project-type-tag"><i class="ri-server-line"></i> Fleet Modernization</div>
+                <div class="impact-chip glow-text"><i class="ri-shield-check-line"></i> 0% Regression</div>
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">Fleet Serverless Modernization: Python 3.11 to 3.12 Migration</h3>
+                <div class="project-role-tag"><i class="ri-user-settings-line"></i> Role: Serverless & Cloud Engineer</div>
+
+                <p class="project-summary">
+                  Led the operational runtime modernization across enterprise AWS Lambda functions, migrating the entire serverless execution fleet from Python 3.11 to Python 3.12 to enforce security compliance.
+                </p>
+
+                <div class="key-achievements">
+                  <div class="achievement-item">
+                    <i class="ri-checkbox-circle-fill"></i>
+                    <span><strong>Dependency Refactoring:</strong> Audited Lambda codebases, third-party packages, and AWS SDK calls to resolve deprecated syntax.</span>
+                  </div>
+                  <div class="achievement-item">
+                    <i class="ri-checkbox-circle-fill"></i>
+                    <span><strong>Automated Testing:</strong> Executed end-to-end integration and smoke tests to guarantee parity in downstream trigger behaviors and data persistence.</span>
+                  </div>
+                  <div class="achievement-item">
+                    <i class="ri-checkbox-circle-fill"></i>
+                    <span><strong>Zero-Regression Signoff:</strong> Secured architecture and security board approvals, achieving 100% zero-regression production cutover.</span>
+                  </div>
+                </div>
+
+                <div class="project-stack">
+                  <span class="stack-tag">AWS Lambda</span>
+                  <span class="stack-tag">Python 3.12</span>
+                  <span class="stack-tag">CloudWatch</span>
+                  <span class="stack-tag">CI/CD</span>
+                  <span class="stack-tag">Automated Testing</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card glass-panel" data-category="etl">
+              <div class="project-banner">
+                <div class="project-type-tag"><i class="ri-links-line"></i> Ingestion Tuning</div>
+                <div class="impact-chip"><i class="ri-cpu-line"></i> JDBC Direct Extract</div>
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">Direct Database Ingestion & Connection Optimization</h3>
+                <div class="project-role-tag"><i class="ri-user-settings-line"></i> Role: AWS Data Engineer</div>
+
+                <p class="project-summary">
+                  Refactored data ingestion pipelines from intermediate S3 flat-file staging to direct operational database extraction via PostgreSQL JDBC connections.
+                </p>
+
+                <div class="key-achievements">
+                  <div class="achievement-item">
+                    <i class="ri-checkbox-circle-fill"></i>
+                    <span><strong>Eliminated Intermediate Hops:</strong> Configured secure direct JDBC connections from AWS Glue to PostgreSQL, eliminating S3 staging overhead.</span>
+                  </div>
+                  <div class="achievement-item">
+                    <i class="ri-checkbox-circle-fill"></i>
+                    <span><strong>Read Throughput Tuning:</strong> Tuned JDBC fetch sizes and predicate pushdowns to prevent database CPU/memory buffer saturation.</span>
+                  </div>
+                  <div class="achievement-item">
+                    <i class="ri-checkbox-circle-fill"></i>
+                    <span><strong>Pipeline Stabilization:</strong> Resolved connection timeouts and stabilized daily automated analytical ingestion jobs.</span>
+                  </div>
+                </div>
+
+                <div class="project-stack">
+                  <span class="stack-tag">AWS Glue</span>
+                  <span class="stack-tag">PostgreSQL</span>
+                  <span class="stack-tag">JDBC</span>
+                  <span class="stack-tag">PySpark</span>
+                  <span class="stack-tag">Amazon S3</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Technical Skills & Architecture Stack Section -->
+      <section id="Skills" class="section-padding skills-section">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="section-tag"><i class="ri-tools-line"></i> Tech Arsenal</span>
+            <h2 class="section-title">Technical Expertise & Capabilities</h2>
+            <p class="section-description">Proven tools, distributed engines, and design patterns utilized in production.</p>
+          </div>
+
+          <div class="skills-grid">
+            <!-- Skill Category 1 -->
+            <div class="skill-category-card glass-panel">
+              <div class="category-header">
+                <div class="category-icon"><i class="ri-cloud-windy-line"></i></div>
+                <h3>Cloud & Infrastructure</h3>
+              </div>
+              <div class="skill-tags">
+                <div class="skill-pill"><i class="ri-amazon-fill"></i> AWS Glue ETL</div>
+                <div class="skill-pill"><i class="ri-folder-cloud-line"></i> Amazon S3</div>
+                <div class="skill-pill"><i class="ri-server-line"></i> AWS Lambda</div>
+                <div class="skill-pill"><i class="ri-database-2-line"></i> DynamoDB</div>
+                <div class="skill-pill"><i class="ri-flow-chart"></i> Step Functions</div>
+                <div class="skill-pill"><i class="ri-time-line"></i> EventBridge</div>
+                <div class="skill-pill"><i class="ri-key-2-line"></i> Secrets Manager</div>
+                <div class="skill-pill"><i class="ri-shield-user-line"></i> IAM Cross-Account</div>
+                <div class="skill-pill"><i class="ri-pulse-line"></i> CloudWatch</div>
+              </div>
+            </div>
+
+            <!-- Skill Category 2 -->
+            <div class="skill-category-card glass-panel">
+              <div class="category-header">
+                <div class="category-icon"><i class="ri-cpu-line"></i></div>
+                <h3>Data Processing & Engines</h3>
+              </div>
+              <div class="skill-tags">
+                <div class="skill-pill"><i class="ri-fire-line"></i> Apache Spark</div>
+                <div class="skill-pill"><i class="ri-code-s-slash-line"></i> PySpark</div>
+                <div class="skill-pill"><i class="ri-terminal-window-line"></i> Spark SQL</div>
+                <div class="skill-pill"><i class="ri-database-line"></i> Apache Hudi (ACID)</div>
+                <div class="skill-pill"><i class="ri-lock-line"></i> OCC Concurrency</div>
+                <div class="skill-pill"><i class="ri-water-flash-line"></i> Lakehouse Architecture</div>
+              </div>
+            </div>
+
+            <!-- Skill Category 3 -->
+            <div class="skill-category-card glass-panel">
+              <div class="category-header">
+                <div class="category-icon"><i class="ri-database-2-line"></i></div>
+                <h3>Databases & Warehousing</h3>
+              </div>
+              <div class="skill-tags">
+                <div class="skill-pill"><i class="ri-database-fill"></i> PostgreSQL</div>
+                <div class="skill-pill"><i class="ri-server-fill"></i> Microsoft SQL Server</div>
+                <div class="skill-pill"><i class="ri-mind-map"></i> Dimensional Modeling</div>
+                <div class="skill-pill"><i class="ri-layout-grid-line"></i> Star Schema</div>
+                <div class="skill-pill"><i class="ri-table-line"></i> Fact & Dimension Tables</div>
+                <div class="skill-pill"><i class="ri-history-line"></i> SCD Type 1 & Type 2</div>
+              </div>
+            </div>
+
+            <!-- Skill Category 4 -->
+            <div class="skill-category-card glass-panel">
+              <div class="category-header">
+                <div class="category-icon"><i class="ri-git-branch-line"></i></div>
+                <h3>Design Patterns & Architecture</h3>
+              </div>
+              <div class="skill-tags">
+                <div class="skill-pill"><i class="ri-flashlight-line"></i> Event-Driven Architecture</div>
+                <div class="skill-pill"><i class="ri-file-code-line"></i> Config-Driven (JSON DAGs)</div>
+                <div class="skill-pill"><i class="ri-share-forward-line"></i> Cross-Account Ingestion</div>
+                <div class="skill-pill"><i class="ri-timer-flash-line"></i> Near-Real-Time ETL</div>
+                <div class="skill-pill"><i class="ri-repeat-2-line"></i> Change Data Capture (CDC)</div>
+                <div class="skill-pill"><i class="ri-file-search-line"></i> Data Discrepancy Auditing</div>
+              </div>
+            </div>
+
+            <!-- Skill Category 5 -->
+            <div class="skill-category-card glass-panel full-width-skill">
+              <div class="category-header">
+                <div class="category-icon"><i class="ri-code-box-line"></i></div>
+                <h3>Languages & Development Tools</h3>
+              </div>
+              <div class="skill-tags">
+                <div class="skill-pill"><i class="ri-file-list-3-line"></i> SQL (CTEs, Window Functions, Stored Procedures)</div>
+                <div class="skill-pill"><i class="ri-python-line"></i> Python 3.11 / 3.12</div>
+                <div class="skill-pill"><i class="ri-git-merge-line"></i> Git & GitHub</div>
+                <div class="skill-pill"><i class="ri-code-line"></i> VS Code</div>
+                <div class="skill-pill"><i class="ri-computer-line"></i> Linux / Bash</div>
+                <div class="skill-pill"><i class="ri-book-read-line"></i> Confluence / Runbooks</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact & Form Section -->
+      <section id="Contact" class="section-padding contact-section">
+        <div class="container">
+          <div class="contact-grid glass-panel">
+            <div class="contact-info">
+              <span class="section-tag"><i class="ri-chat-4-line"></i> Let's Connect</span>
+              <h2 class="contact-title">Let's Discuss Data Engineering & Cloud Solutions</h2>
+              <p class="contact-text">
+                Interested in high-throughput cloud ETL pipelines, data lake optimizations, serverless backend architecture, or technical collaborations? Feel free to send a message or connect directly.
+              </p>
+
+              <div class="contact-details">
+                <div class="contact-item">
+                  <div class="icon-box"><i class="ri-mail-line"></i></div>
+                  <div>
+                    <span class="lbl">Email & Inquiries</span>
+                    <a href="mailto:professorx2001@gmail.com" class="val">mdzakihussain@tcs.com / LeetCode Profile</a>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <div class="icon-box"><i class="ri-map-pin-line"></i></div>
+                  <div>
+                    <span class="lbl">Location</span>
+                    <span class="val">Bihar / TCS Offices, India</span>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <div class="icon-box"><i class="ri-award-line"></i></div>
+                  <div>
+                    <span class="lbl">Current Role</span>
+                    <span class="val">AWS Data Engineer @ TCS (Aegon UK)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="social-links-footer">
+                <a href="https://leetcode.com/professorx2001/" target="_blank" class="social-circle"><img src="public/leetcode.svg" alt="LeetCode"></a>
+                <a href="https://www.linkedin.com/in/mdzakihussain/" target="_blank" class="social-circle"><img src="public/linkedin.svg" alt="LinkedIn"></a>
+                <a href="https://github.com/professorx2001" target="_blank" class="social-circle"><img src="public/github.svg" alt="GitHub"></a>
+                <a href="https://twitter.com/professorx2001" target="_blank" class="social-circle"><img src="public/twitter.svg" alt="Twitter"></a>
+              </div>
+            </div>
+
+            <!-- Form -->
+            <div class="contact-form-wrapper">
+              <form id="contactForm" class="contact-form">
+                <h3>Send a Message</h3>
+                <div class="form-group">
+                  <label for="name">Full Name *</label>
+                  <input type="text" id="name" name="name" placeholder="e.g. Alex Morgan" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email Address *</label>
+                  <input type="email" id="email" name="email" placeholder="e.g. alex@company.com" required />
+                </div>
+                <div class="form-group">
+                  <label for="subject">Subject</label>
+                  <input type="text" id="subject" name="subject" placeholder="Project Inquiry / Data Engineering" />
+                </div>
+                <div class="form-group">
+                  <label for="message">Your Message *</label>
+                  <textarea id="message" name="message" rows="4" placeholder="How can I help with your cloud infrastructure or data pipelines?" required></textarea>
+                </div>
+                <button type="submit" id="sendMail" class="btn btn-primary btn-full">
+                  <span>Send Message</span> <i class="ri-send-plane-fill"></i>
+                </button>
+                <div id="formStatus" class="form-status"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="container footer-content">
+          <p>© 2026 Md Zaki Hussain. AWS Data Engineer. All rights reserved.</p>
+          <div class="footer-links">
+            <a href="#Home">Home</a>
+            <a href="#Experience">Experience</a>
+            <a href="#Projects">Projects</a>
+            <a href="#Skills">Skills</a>
           </div>
         </div>
       </footer>
-
     </div>
+
+    <!-- Back to top button -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+      <i class="ri-arrow-up-line"></i>
+    </button>
+
+    <script src="main.js"></script>
   </body>
-  <script src="main.js"></script>
 </html>
