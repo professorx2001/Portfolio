@@ -4,8 +4,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Primary Meta Tags -->
   <title>Md Zaki Hussain | AWS Data Engineer</title>
-  <meta name="description" content="Portfolio of Md Zaki Hussain - AWS Data Engineer." />
+  <meta name="title" content="Md Zaki Hussain | AWS Data Engineer" />
+  <meta name="description"
+    content="AWS Data Engineer at TCS (Aegon UK). Specialized in PySpark, AWS Glue, Step Functions, PostgreSQL, Apache Hudi & High-Throughput Data Lakes." />
+  <meta name="keywords"
+    content="AWS Data Engineer, PySpark, AWS Glue, Step Functions, Apache Hudi, PostgreSQL, TCS, Aegon UK, Md Zaki Hussain" />
+  <meta name="author" content="Md Zaki Hussain" />
+
+  <!-- Open Graph / LinkedIn / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Md Zaki Hussain | AWS Data Engineer" />
+  <meta property="og:description"
+    content="AWS Data Engineer at TCS (Aegon UK). 1B+ Records Managed, 85%+ Latency Cut, 7.5x Pipeline Speedup." />
+  <meta property="og:image" content="my.jpg" />
+
+  <!-- Twitter / X -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:title" content="Md Zaki Hussain | AWS Data Engineer" />
+  <meta property="twitter:description"
+    content="AWS Data Engineer at TCS (Aegon UK). 1B+ Records Managed, 85%+ Latency Cut, 7.5x Pipeline Speedup." />
+  <meta property="twitter:image" content="my.jpg" />
+
   <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,7 +35,9 @@
     rel="stylesheet" />
   <!-- RemixIcon CDN -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <!-- Icons & CSS -->
   <link rel="shortcut icon" href="hi.svg" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="hi.svg" />
   <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -28,6 +51,7 @@
   <div id="root">
     <!-- Navigation Bar -->
     <nav id="nav_bar">
+      <div id="scrollProgress" class="scroll-progress-bar"></div>
       <div class="nav-container">
         <a href="#Home" class="brand-logo">
           <span class="logo-accent">&lt;</span>x<span class="logo-highlight">.DE</span><span
@@ -79,7 +103,7 @@
             <!-- Card 2: Performance Tuning (Lakehouse Optimization) -->
             <div class="metric-card">
               <div class="metric-value gradient-text">85%+</div>
-              <div class="metric-label">ETL Write Latency Cut</div>
+              <div class="metric-label">Reduce ETL Write Latency</div>
             </div>
 
             <!-- Card 3: Throughput Speedup (Apache Hudi OCC) -->
@@ -161,21 +185,6 @@
                   <span class="pill"><i class="ri-brain-line"></i> AI</span>
                 </div>
               </div>
-
-              <!-- Floating Code Snippet Card -->
-              <!-- <div class="floating-code-card glass-panel">
-                <div class="code-header">
-                  <span class="dot red"></span>
-                  <span class="dot yellow"></span>
-                  <span class="dot green"></span>
-                  <span class="code-title">hudi_occ_config.py</span>
-                </div>
-                <pre><code><span class="code-keyword">hudi_options</span> = {
-  <span class="code-str">'hoodie.write.concurrency.mode'</span>: <span class="code-val">'optimistic_concurrency_control'</span>,
-  <span class="code-str">'hoodie.cleaner.policy.failed.writes'</span>: <span class="code-val">'LAZY'</span>,
-  <span class="code-str">'hoodie.write.lock.provider'</span>: <span class="code-val">'DynamoDBLockProvider'</span>
-}</code></pre>
-              </div> -->
             </div>
           </div>
         </div>
@@ -304,10 +313,12 @@
 
         <!-- Project Filter Tabs -->
         <div class="project-filters">
-          <button class="filter-btn active" data-filter="all">All Projects (4)</button>
-          <button class="filter-btn" data-filter="lakehouse">Data Lakes & Hudi</button>
-          <button class="filter-btn" data-filter="etl">ETL & Warehousing</button>
-          <button class="filter-btn" data-filter="serverless">Serverless & Cloud</button>
+          <button class="filter-btn active" data-filter="all">All Projects <span class="filter-count">4</span></button>
+          <button class="filter-btn" data-filter="lakehouse">Data Lakes & Hudi <span
+              class="filter-count">2</span></button>
+          <button class="filter-btn" data-filter="etl">ETL & Warehousing <span class="filter-count">3</span></button>
+          <button class="filter-btn" data-filter="serverless">Serverless & Cloud <span
+              class="filter-count">2</span></button>
         </div>
 
         <!-- Projects Grid -->
@@ -653,7 +664,13 @@
                 <div class="icon-box"><i class="ri-mail-line"></i></div>
                 <div>
                   <span class="lbl">Email</span>
-                  <a href="mailto:mdzakihusain@gmail.com" class="val">mdzakihusain@gmail.com</a>
+                  <div class="email-copy-wrapper">
+                    <a href="mailto:mdzakihusain@gmail.com" class="val">mdzakihusain@gmail.com</a>
+                    <button id="copyEmailBtn" class="copy-email-btn" aria-label="Copy Email to Clipboard"
+                      title="Copy Email to Clipboard">
+                      <i class="ri-file-copy-line"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
               <div class="contact-item">
@@ -737,6 +754,9 @@
   <button id="backToTop" class="back-to-top" aria-label="Back to top">
     <i class="ri-arrow-up-line"></i>
   </button>
+
+  <!-- Toast Notification -->
+  <div id="toastNotification" class="toast-notification">✓ Email copied to clipboard!</div>
 
   <script type="module" src="/main.js"></script>
 </body>

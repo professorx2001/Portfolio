@@ -68,10 +68,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Highlight nav links on scroll
+  // Highlight nav links & update scroll progress bar on scroll
   const sections = document.querySelectorAll('section[id]');
+  const progressBar = document.getElementById('scrollProgress');
+
   window.addEventListener('scroll', () => {
     const scrollY = window.pageYOffset;
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    if (progressBar && totalHeight > 0) {
+      const progress = (scrollY / totalHeight) * 100;
+      progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+    }
 
     sections.forEach((current) => {
       const sectionHeight = current.offsetHeight;
@@ -108,11 +116,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 4. Project Category Filtering
+  // 4. Project Category Filtering & Dynamic Badge Counts
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectCards = document.querySelectorAll('.project-card');
 
+  // Dynamically sync count badges with project cards
   filterBtns.forEach((btn) => {
+    const filterValue = btn.getAttribute('data-filter');
+    const countBadge = btn.querySelector('.filter-count');
+    if (countBadge) {
+      if (filterValue === 'all') {
+        countBadge.textContent = projectCards.length;
+      } else {
+        let count = 0;
+        projectCards.forEach((card) => {
+          const categories = (card.getAttribute('data-category') || '').split(' ');
+          if (categories.includes(filterValue)) count++;
+        });
+        countBadge.textContent = count;
+      }
+    }
+
     btn.addEventListener('click', () => {
       // Remove active class from all buttons
       filterBtns.forEach((b) => b.classList.remove('active'));
@@ -138,6 +162,31 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
+
+  // Copy Email to Clipboard Toast Handler
+  const copyBtn = document.getElementById('copyEmailBtn');
+  const toast = document.getElementById('toastNotification');
+
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      const email = 'mdzakihusain@gmail.com';
+      navigator.clipboard.writeText(email).then(() => {
+        if (toast) {
+          toast.classList.add('show');
+          setTimeout(() => {
+            toast.classList.remove('show');
+          }, 3000);
+        }
+      }).catch(() => {
+        // Fallback if clipboard API is restricted
+        if (toast) {
+          toast.textContent = '✓ Email: mdzakihusain@gmail.com';
+          toast.classList.add('show');
+          setTimeout(() => { toast.classList.remove('show'); }, 3000);
+        }
+      });
+    });
+  }
 
   // 5. Contact Form Handler (Simulated Submit with User Feedback)
   const contactForm = document.getElementById('contactForm');
