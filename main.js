@@ -3,46 +3,40 @@
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Mobile Menu Toggle & Backdrop Handler
+  // 1. Mobile Menu Toggle Handler (No Screen Dimming)
   const mobileToggle = document.getElementById('mobile_toggle');
   const navLinksContainer = document.getElementById('nav_links');
   const navLinks = document.querySelectorAll('.nav-links a');
 
-  if (mobileToggle && navLinksContainer) {
-    // Create backdrop overlay if not present
-    let overlay = document.querySelector('.nav-backdrop');
-    if (!overlay) {
-      overlay = document.createElement('div');
-      overlay.className = 'nav-backdrop';
-      document.body.appendChild(overlay);
+  const toggleMenu = (shouldOpen) => {
+    if (!navLinksContainer || !mobileToggle) return;
+    const isCurrentlyOpen = navLinksContainer.classList.contains('active');
+    const openState = shouldOpen !== undefined ? shouldOpen : !isCurrentlyOpen;
+
+    if (openState) {
+      navLinksContainer.classList.add('active');
+      const icon = mobileToggle.querySelector('i');
+      if (icon) icon.className = 'ri-close-line';
+    } else {
+      navLinksContainer.classList.remove('active');
+      const icon = mobileToggle.querySelector('i');
+      if (icon) icon.className = 'ri-menu-3-line';
     }
+  };
 
-    const toggleMenu = (shouldOpen) => {
-      const isCurrentlyOpen = navLinksContainer.classList.contains('active');
-      const openState = shouldOpen !== undefined ? shouldOpen : !isCurrentlyOpen;
-
-      if (openState) {
-        navLinksContainer.classList.add('active');
-        overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        const icon = mobileToggle.querySelector('i');
-        if (icon) icon.className = 'ri-close-line';
-      } else {
-        navLinksContainer.classList.remove('active');
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-        const icon = mobileToggle.querySelector('i');
-        if (icon) icon.className = 'ri-menu-3-line';
-      }
-    };
-
+  if (mobileToggle && navLinksContainer) {
     mobileToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       toggleMenu();
     });
 
-    overlay.addEventListener('click', () => {
-      toggleMenu(false);
+    // Close menu when clicking anywhere outside
+    document.addEventListener('click', (e) => {
+      if (navLinksContainer.classList.contains('active') &&
+          !navLinksContainer.contains(e.target) &&
+          !mobileToggle.contains(e.target)) {
+        toggleMenu(false);
+      }
     });
   }
 
@@ -50,32 +44,25 @@ document.addEventListener('DOMContentLoaded', () => {
   navLinks.forEach((link) => {
     link.addEventListener('click', function (e) {
       const href = this.getAttribute('href');
-      if (href.startsWith('#')) {
+      if (href && href.startsWith('#')) {
         e.preventDefault();
         const targetId = href.substring(1);
         const targetElement = document.getElementById(targetId);
 
+        // Always close mobile menu when a link is clicked
+        toggleMenu(false);
+
         if (targetElement) {
-          // Close mobile menu if open
-          if (navLinksContainer && navLinksContainer.classList.contains('active')) {
-            navLinksContainer.classList.remove('active');
-            const overlay = document.querySelector('.nav-backdrop');
-            if (overlay) overlay.classList.remove('active');
-            document.body.style.overflow = '';
-            if (mobileToggle) {
-              const icon = mobileToggle.querySelector('i');
-              if (icon) icon.className = 'ri-menu-3-line';
-            }
-          }
+          setTimeout(() => {
+            const headerOffset = 80;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-          const headerOffset = 80;
-          const elementPosition = targetElement.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth',
-          });
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth',
+            });
+          }, 60);
         }
       }
     });
