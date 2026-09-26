@@ -3,22 +3,46 @@
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Mobile Menu Toggle
+  // 1. Mobile Menu Toggle & Backdrop Handler
   const mobileToggle = document.getElementById('mobile_toggle');
   const navLinksContainer = document.getElementById('nav_links');
   const navLinks = document.querySelectorAll('.nav-links a');
 
   if (mobileToggle && navLinksContainer) {
-    mobileToggle.addEventListener('click', () => {
-      navLinksContainer.classList.toggle('active');
-      const icon = mobileToggle.querySelector('i');
-      if (icon) {
-        if (navLinksContainer.classList.contains('active')) {
-          icon.className = 'ri-close-line';
-        } else {
-          icon.className = 'ri-menu-3-line';
-        }
+    // Create backdrop overlay if not present
+    let overlay = document.querySelector('.nav-backdrop');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.className = 'nav-backdrop';
+      document.body.appendChild(overlay);
+    }
+
+    const toggleMenu = (shouldOpen) => {
+      const isCurrentlyOpen = navLinksContainer.classList.contains('active');
+      const openState = shouldOpen !== undefined ? shouldOpen : !isCurrentlyOpen;
+
+      if (openState) {
+        navLinksContainer.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        const icon = mobileToggle.querySelector('i');
+        if (icon) icon.className = 'ri-close-line';
+      } else {
+        navLinksContainer.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+        const icon = mobileToggle.querySelector('i');
+        if (icon) icon.className = 'ri-menu-3-line';
       }
+    };
+
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    overlay.addEventListener('click', () => {
+      toggleMenu(false);
     });
   }
 
@@ -33,8 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (targetElement) {
           // Close mobile menu if open
-          if (navLinksContainer) {
+          if (navLinksContainer && navLinksContainer.classList.contains('active')) {
             navLinksContainer.classList.remove('active');
+            const overlay = document.querySelector('.nav-backdrop');
+            if (overlay) overlay.classList.remove('active');
+            document.body.style.overflow = '';
             if (mobileToggle) {
               const icon = mobileToggle.querySelector('i');
               if (icon) icon.className = 'ri-menu-3-line';
