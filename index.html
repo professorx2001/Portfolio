@@ -281,7 +281,7 @@
 
         <!-- Project Filter Tabs -->
         <div class="project-filters">
-          <button class="filter-btn active" data-filter="all">All Projects (5)</button>
+          <button class="filter-btn active" data-filter="all">All Projects (4)</button>
           <button class="filter-btn" data-filter="lakehouse">Data Lakes & Hudi</button>
           <button class="filter-btn" data-filter="etl">ETL & Warehousing</button>
           <button class="filter-btn" data-filter="serverless">Serverless & Cloud</button>
@@ -291,114 +291,18 @@
         <div class="projects-grid">
 
           <!-- Project 1 -->
-          <div class="project-card glass-panel" data-category="lakehouse">
-            <div class="project-banner">
-              <div class="project-type-tag"><i class="ri-flashlight-line"></i> High-Performance Optimization</div>
-              <div class="impact-chip glow-text"><i class="ri-line-chart-line"></i> 85%+ Speedup</div>
-            </div>
-            <div class="project-body">
-              <h3 class="project-title">Apache Hudi Lakehouse Concurrency & Performance Optimization</h3>
-              <div class="project-role-tag"><i class="ri-user-settings-line"></i> Role: AWS Data Engineer</div>
-
-              <p class="project-summary">
-                Re-engineered a mission-critical Amazon S3 Apache Hudi pipeline where multiple concurrent ingestion
-                streams writing different primary key sequences to a shared table suffered severe write contention,
-                reducing execution time from 2.5 hours to under 20 minutes.
-              </p>
-
-              <div class="key-achievements">
-                <div class="achievement-item">
-                  <i class="ri-checkbox-circle-fill"></i>
-                  <span><strong>OCC & Physical Partitioning:</strong> Designed a table partitioning scheme combining
-                    Optimistic Concurrency Control (OCC) to eliminate table-level write locks.</span>
-                </div>
-                <div class="achievement-item">
-                  <i class="ri-checkbox-circle-fill"></i>
-                  <span><strong>Zero-Downtime Migration:</strong> Authored backfill scripts to migrate historical
-                    datasets into the new Hudi schema without data corruption.</span>
-                </div>
-                <div class="achievement-item">
-                  <i class="ri-checkbox-circle-fill"></i>
-                  <span><strong>Parallel Glue Scheduling:</strong> Restructured Glue jobs to execute concurrent parallel
-                    writes safely into the shared Hudi target table.</span>
-                </div>
-              </div>
-
-              <div class="project-metric-banner">
-                <div class="metric-unit">
-                  <span class="val">2.5 hrs → 20 mins</span>
-                  <span class="lbl">Over 7.5x Performance Gain delivering data hours ahead of SLA</span>
-                </div>
-              </div>
-
-              <div class="project-stack">
-                <span class="stack-tag">Apache Hudi</span>
-                <span class="stack-tag">Amazon S3</span>
-                <span class="stack-tag">AWS Glue</span>
-                <span class="stack-tag">PySpark</span>
-                <span class="stack-tag">OCC</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 2 -->
-          <div class="project-card glass-panel" data-category="lakehouse serverless">
-            <div class="project-banner">
-              <div class="project-type-tag"><i class="ri-shield-keyhole-line"></i> Near-Real-Time & Security</div>
-              <div class="impact-chip"><i class="ri-refresh-line"></i> CDC & Cross-Account</div>
-            </div>
-            <div class="project-body">
-              <h3 class="project-title">Gemini Block 4: NRT & Cross-Account Replication Architecture</h3>
-              <div class="project-role-tag"><i class="ri-user-settings-line"></i> Role: AWS Data Engineer</div>
-
-              <p class="project-summary">
-                Architected and deployed two production-grade pipelines in the Gemini ecosystem: an event-driven
-                near-real-time ingestion engine and a secure cross-account database replication framework.
-              </p>
-
-              <div class="key-achievements">
-                <div class="achievement-item">
-                  <i class="ri-checkbox-circle-fill"></i>
-                  <span><strong>Event-Driven Microservices:</strong> EventBridge rules monitor DynamoDB timestamp
-                    updates to trigger Lambda microservices evaluating delta arrivals.</span>
-                </div>
-                <div class="achievement-item">
-                  <i class="ri-checkbox-circle-fill"></i>
-                  <span><strong>Config-Driven ETL (JSON DAGs):</strong> Developed a JSON-driven transformation framework
-                    in Glue defining modular `Read`, `Transform`, and `Write` execution stages.</span>
-                </div>
-                <div class="achievement-item">
-                  <i class="ri-checkbox-circle-fill"></i>
-                  <span><strong>Cross-Account Security:</strong> Configured cross-account IAM role assumption and
-                    Secrets Manager integration to replicate processed data across isolated accounts.</span>
-                </div>
-              </div>
-
-              <div class="project-stack">
-                <span class="stack-tag">AWS Glue</span>
-                <span class="stack-tag">AWS Lambda</span>
-                <span class="stack-tag">DynamoDB</span>
-                <span class="stack-tag">Amazon S3</span>
-                <span class="stack-tag">Apache Hudi</span>
-                <span class="stack-tag">EventBridge</span>
-                <span class="stack-tag">IAM Secrets Manager</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 3 -->
-          <div class="project-card glass-panel" data-category="etl">
+          <div class="project-card glass-panel" data-category="etl serverless">
             <div class="project-banner">
               <div class="project-type-tag"><i class="ri-database-2-line"></i> Warehouse Modernization</div>
               <div class="impact-chip"><i class="ri-exchange-box-line"></i> CDC & Star Schema</div>
             </div>
             <div class="project-body">
-              <h3 class="project-title">Enterprise "Mini Warehouse" Migration: SQL Server to PostgreSQL</h3>
+              <h3 class="project-title">Enterprise Warehouse Migration: SQL Server to PostgreSQL</h3>
               <div class="project-role-tag"><i class="ri-user-settings-line"></i> Role: AWS Data Engineer</div>
 
               <p class="project-summary">
                 Decommissioned an legacy on-premise SQL Server data warehouse and built a centralized AWS PostgreSQL
-                "Mini Warehouse" to unblock downstream business intelligence reporting.
+                "Warehouse" to unblock downstream business intelligence reporting.
               </p>
 
               <div class="key-achievements">
@@ -409,18 +313,19 @@
                 </div>
                 <div class="achievement-item">
                   <i class="ri-checkbox-circle-fill"></i>
-                  <span><strong>Dimensional Modeling & CDC:</strong> Implemented Star Schema modeling with automated CDC
-                    pipelines handling SCD Type 1, SCD Type 2, and Non-SCD.</span>
+                  <span><strong>Dimensional Modeling & Incremental ETL:</strong> Developed Star Schema architectures and built automated batch workflows to process incremental deltas across SCD Type 1, SCD Type 2, and Non-SCD tables.</span>
                 </div>
                 <div class="achievement-item">
                   <i class="ri-checkbox-circle-fill"></i>
-                  <span><strong>Idempotent Upserts:</strong> Programmed Glue routines reading delta files and executing
-                    idempotent upserts into PostgreSQL reporting tables.</span>
+                  <span><strong>Step Functions Orchestration:</strong> Orchestrated modular Glue pipeline execution
+                    workflows using child AWS Step Functions coordinated by a master Step Function controller for
+                    end-to-end reliability.</span>
                 </div>
               </div>
 
               <div class="project-stack">
                 <span class="stack-tag">AWS Glue</span>
+                <span class="stack-tag">AWS Step Functions</span>
                 <span class="stack-tag">Spark SQL</span>
                 <span class="stack-tag">PySpark</span>
                 <span class="stack-tag">PostgreSQL</span>
@@ -430,89 +335,162 @@
             </div>
           </div>
 
-          <!-- Project 4 -->
-          <div class="project-card glass-panel" data-category="serverless">
-            <div class="project-banner">
-              <div class="project-type-tag"><i class="ri-server-line"></i> Fleet Modernization</div>
-              <div class="impact-chip glow-text"><i class="ri-shield-check-line"></i> 0% Regression</div>
-            </div>
-            <div class="project-body">
-              <h3 class="project-title">Fleet Serverless Modernization: Python 3.11 to 3.12 Migration</h3>
-              <div class="project-role-tag"><i class="ri-user-settings-line"></i> Role: Serverless & Cloud Engineer
-              </div>
-
-              <p class="project-summary">
-                Led the operational runtime modernization across enterprise AWS Lambda functions, migrating the entire
-                serverless execution fleet from Python 3.11 to Python 3.12 to enforce security compliance.
-              </p>
-
-              <div class="key-achievements">
-                <div class="achievement-item">
-                  <i class="ri-checkbox-circle-fill"></i>
-                  <span><strong>Dependency Refactoring:</strong> Audited Lambda codebases, third-party packages, and AWS
-                    SDK calls to resolve deprecated syntax.</span>
-                </div>
-                <div class="achievement-item">
-                  <i class="ri-checkbox-circle-fill"></i>
-                  <span><strong>Automated Testing:</strong> Executed end-to-end integration and smoke tests to guarantee
-                    parity in downstream trigger behaviors and data persistence.</span>
-                </div>
-                <div class="achievement-item">
-                  <i class="ri-checkbox-circle-fill"></i>
-                  <span><strong>Zero-Regression Signoff:</strong> Secured architecture and security board approvals,
-                    achieving 100% zero-regression production cutover.</span>
-                </div>
-              </div>
-
-              <div class="project-stack">
-                <span class="stack-tag">AWS Lambda</span>
-                <span class="stack-tag">Python 3.12</span>
-                <span class="stack-tag">CloudWatch</span>
-                <span class="stack-tag">CI/CD</span>
-                <span class="stack-tag">Automated Testing</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 5 -->
+          <!-- Project 2 -->
+          <!-- Project: Direct Database Ingestion -->
           <div class="project-card glass-panel" data-category="etl">
             <div class="project-banner">
-              <div class="project-type-tag"><i class="ri-links-line"></i> Ingestion Tuning</div>
-              <div class="impact-chip"><i class="ri-cpu-line"></i> JDBC Direct Extract</div>
+              <div class="project-type-tag"><i class="ri-git-merge-line"></i> Pipeline Decoupling</div>
+              <div class="impact-chip glow-text"><i class="ri-time-line"></i> SLA Resolution</div>
             </div>
             <div class="project-body">
-              <h3 class="project-title">Direct Database Ingestion & Connection Optimization</h3>
+              <h3 class="project-title">Direct PostgreSQL JDBC Ingestion & Pipeline Decoupling</h3>
               <div class="project-role-tag"><i class="ri-user-settings-line"></i> Role: AWS Data Engineer</div>
 
               <p class="project-summary">
-                Refactored data ingestion pipelines from intermediate S3 flat-file staging to direct operational
-                database extraction via PostgreSQL JDBC connections.
+                Decoupled downstream analytics from delayed S3 batch workflows by routing AWS Glue directly to
+                PostgreSQL via JDBC, eliminating intermediate staging bottlenecks and meeting daily SLAs.
               </p>
 
               <div class="key-achievements">
                 <div class="achievement-item">
                   <i class="ri-checkbox-circle-fill"></i>
-                  <span><strong>Eliminated Intermediate Hops:</strong> Configured secure direct JDBC connections from
-                    AWS Glue to PostgreSQL, eliminating S3 staging overhead.</span>
+                  <span><strong>Eliminated Upstream Batch Dependency:</strong> Bypassed the delayed multi-hop S3 file
+                    cleaning workflow by routing Glue directly to the PostgreSQL instance already fed by AWS DMS,
+                    resolving downstream schedule conflicts.</span>
                 </div>
                 <div class="achievement-item">
                   <i class="ri-checkbox-circle-fill"></i>
-                  <span><strong>Read Throughput Tuning:</strong> Tuned JDBC fetch sizes and predicate pushdowns to
-                    prevent database CPU/memory buffer saturation.</span>
+                  <span><strong>Query & Throughput Tuning:</strong> Applied predicate pushdown filters to minimize
+                    extraction payloads, tuning JDBC fetch sizes and partition boundaries (lower/upper bounds) to avoid
+                    database memory buffer saturation.</span>
                 </div>
-                <div class="achievement-item">
-                  <i class="ri-checkbox-circle-fill"></i>
-                  <span><strong>Pipeline Stabilization:</strong> Resolved connection timeouts and stabilized daily
-                    automated analytical ingestion jobs.</span>
+              </div>
+
+              <div class="project-metric-banner">
+                <div class="metric-unit">
+                  <span class="val">Zero Staging Lag</span>
+                  <span class="lbl">Eliminated S3 Schedule Conflicts via Direct PostgreSQL Ingestion</span>
                 </div>
               </div>
 
               <div class="project-stack">
                 <span class="stack-tag">AWS Glue</span>
                 <span class="stack-tag">PostgreSQL</span>
+                <span class="stack-tag">AWS DMS</span>
                 <span class="stack-tag">JDBC</span>
                 <span class="stack-tag">PySpark</span>
                 <span class="stack-tag">Amazon S3</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="project-card glass-panel" data-category="lakehouse serverless">
+            <div class="project-banner">
+              <div class="project-type-tag"><i class="ri-shield-keyhole-line"></i> Event-Driven Architecture</div>
+              <div class="impact-chip glow-text"><i class="ri-refresh-line"></i> Near-Real-Time & Cross-Account</div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Event-Driven Cross-Account Data Replication</h3>
+              <div class="project-role-tag"><i class="ri-user-settings-line"></i> Role: AWS Data Engineer</div>
+
+              <p class="project-summary">
+                Architected and deployed an automated, near-real-time ingestion pipeline from scratch. Engineered an
+                event-driven workflow where EventBridge and Lambda monitor metadata timestamp updates in DynamoDB,
+                triggering AWS Glue jobs to run Spark SQL transformations over Apache Hudi tables and replicate clean
+                records into cross-account DynamoDB targets.
+              </p>
+
+              <div class="key-achievements">
+                <div class="achievement-item">
+                  <i class="ri-checkbox-circle-fill"></i>
+                  <span><strong>Event-Driven Delta Ingestion:</strong> Configured EventBridge rules to trigger Lambda
+                    microservices that evaluate metadata timestamp updates in DynamoDB, automatically triggering
+                    downstream Glue ETL on detected arrivals.</span>
+                </div>
+                <div class="achievement-item">
+                  <i class="ri-checkbox-circle-fill"></i>
+                  <span><strong>Config-Driven ETL Framework:</strong> Implemented modular AWS Glue and Spark SQL
+                    transformations controlled by JSON execution schemas defining discrete <code>Read</code>,
+                    <code>Transform</code>, and <code>Write</code> stages.</span>
+                </div>
+                <div class="achievement-item">
+                  <i class="ri-checkbox-circle-fill"></i>
+                  <span><strong>Secure Cross-Account Delivery:</strong> Configured cross-account IAM role assumption
+                    policies and Secrets Manager credentials to safely replicate processed payloads into external
+                    account DynamoDB tables.</span>
+                </div>
+              </div>
+
+              <div class="project-metric-banner">
+                <div class="metric-unit">
+                  <span class="val">Automated Delivery</span>
+                  <span class="lbl">Zero-Downtime Cross-Account Replication via Event-Driven Serverless Compute</span>
+                </div>
+              </div>
+
+              <div class="project-stack">
+                <span class="stack-tag">AWS Glue</span>
+                <span class="stack-tag">AWS Lambda</span>
+                <span class="stack-tag">Amazon DynamoDB</span>
+                <span class="stack-tag">Apache Hudi</span>
+                <span class="stack-tag">EventBridge</span>
+                <span class="stack-tag">Amazon S3</span>
+                <span class="stack-tag">Cross-Account IAM</span>
+                <span class="stack-tag">Secrets Manager</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4 -->
+          <div class="project-card glass-panel" data-category="lakehouse etl">
+            <div class="project-banner">
+              <div class="project-type-tag"><i class="ri-flashlight-line"></i> High-Performance Optimization</div>
+              <div class="impact-chip glow-text"><i class="ri-line-chart-line"></i> 85%+ Speedup</div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Apache Hudi Lakehouse Concurrency & Performance Optimization</h3>
+              <div class="project-role-tag"><i class="ri-user-settings-line"></i> Role: AWS Data Engineer</div>
+
+              <p class="project-summary">
+                Re-engineered a high-latency Apache Hudi pipeline on Amazon S3 where sequential write streams with
+                different primary key sequences caused severe write contention and 2.5-hour delays. Implemented physical
+                table partitioning and Optimistic Concurrency Control (OCC) to enable safe parallel writes, reducing
+                runtime to under 20 minutes.
+              </p>
+
+              <div class="key-achievements">
+                <div class="achievement-item">
+                  <i class="ri-checkbox-circle-fill"></i>
+                  <span><strong>OCC & Physical Partitioning:</strong> Implemented a table partitioning strategy paired
+                    with Optimistic Concurrency Control (OCC), leveraging DynamoDB as a distributed lock provider to
+                    safely manage concurrent commits.</span>
+                </div>
+                <div class="achievement-item">
+                  <i class="ri-checkbox-circle-fill"></i>
+                  <span><strong>Zero-Downtime Data Migration:</strong> Executed a historical data backfill to migrate
+                    existing records into the new partitioned Hudi table without data loss or corruption.</span>
+                </div>
+                <div class="achievement-item">
+                  <i class="ri-checkbox-circle-fill"></i>
+                  <span><strong>Parallel Pipeline Scheduling:</strong> Restructured daily AWS Glue jobs to execute
+                    concurrent parallel writes safely into the shared Hudi target table.</span>
+                </div>
+              </div>
+
+              <div class="project-metric-banner">
+                <div class="metric-unit">
+                  <span class="val">2.5h → &lt;20m</span>
+                  <span class="lbl">7.5x Speedup (Delivered Data Hours Ahead of Daily SLA)</span>
+                </div>
+              </div>
+
+              <div class="project-stack">
+                <span class="stack-tag">Apache Hudi</span>
+                <span class="stack-tag">AWS Glue</span>
+                <span class="stack-tag">PySpark</span>
+                <span class="stack-tag">Amazon S3</span>
+                <span class="stack-tag">OCC</span>
               </div>
             </div>
           </div>
@@ -706,8 +684,7 @@
               </div>
               <div class="form-group">
                 <label for="message">Your Message *</label>
-                <textarea id="message" name="message" rows="4"
-                  placeholder="How can I help you?" required></textarea>
+                <textarea id="message" name="message" rows="4" placeholder="How can I help you?" required></textarea>
               </div>
               <button type="submit" id="sendMail" class="btn btn-primary btn-full">
                 <span>Send Message</span> <i class="ri-send-plane-fill"></i>
