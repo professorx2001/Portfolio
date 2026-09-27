@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#07090e" />
   <!-- Primary Meta Tags -->
   <title>Md Zaki Hussain | AWS Data Engineer</title>
   <meta name="title" content="Md Zaki Hussain | AWS Data Engineer" />
@@ -15,17 +16,18 @@
 
   <!-- Open Graph / LinkedIn / Facebook -->
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mdzakihussainx.netlify.app/" />
   <meta property="og:title" content="Md Zaki Hussain | AWS Data Engineer" />
   <meta property="og:description"
     content="AWS Data Engineer at TCS (Aegon UK). 1B+ Records Managed, 85%+ Latency Cut, 7.5x Pipeline Speedup." />
-  <meta property="og:image" content="my.jpg" />
+  <meta property="og:image" content="https://mdzakihussainx.netlify.app/my.jpg" />
 
   <!-- Twitter / X -->
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:title" content="Md Zaki Hussain | AWS Data Engineer" />
   <meta property="twitter:description"
     content="AWS Data Engineer at TCS (Aegon UK). 1B+ Records Managed, 85%+ Latency Cut, 7.5x Pipeline Speedup." />
-  <meta property="twitter:image" content="my.jpg" />
+  <meta property="twitter:image" content="https://mdzakihussainx.netlify.app/my.jpg" />
 
   <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,8 +35,11 @@
   <link
     href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet" />
-  <!-- RemixIcon CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <!-- RemixIcon CDN — integrity hash ensures file hasn't been tampered with -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+    integrity="sha384-6FSSi597BTd6QcnsBNoLclRKxTOyyYqkaucRjFgCNr8wHVCp0COLClSPY4Vy/bjh"
+    crossorigin="anonymous" />
   <!-- Icons & CSS -->
   <link rel="shortcut icon" href="hi.svg" type="image/x-icon" />
   <link rel="apple-touch-icon" href="hi.svg" />
@@ -68,7 +73,7 @@
         </ul>
 
         <div class="nav-cta">
-          <a href="Resume.pdf" target="_blank" download="Md_Zaki_Hussain_Resume.pdf" class="btn btn-outline btn-sm">
+          <a href="Resume.pdf" target="_blank" rel="noopener noreferrer" download="Md_Zaki_Hussain_Resume.pdf" class="btn btn-outline btn-sm">
             <i class="ri-file-download-line"></i> Resume
           </a>
           <button id="mobile_toggle" class="mobile-toggle" aria-label="Toggle menu">
@@ -84,7 +89,7 @@
         <div class="hero-content">
           <div class="award-badge glowing-badge">
             <i class="ri-award-fill"></i>
-            <span>Star Performer Awarded • Dec 2025</span>
+            <span>Awarded Star Performer • Dec 2025</span>
           </div>
 
           <h1 class="hero-title">
@@ -132,11 +137,11 @@
           <div class="social-strip">
             <span class="social-label">Connect & Code:</span>
             <div class="social-icons">
-              <a href="https://www.linkedin.com/in/mdzakihussain/" target="_blank" title="LinkedIn"
+              <a href="https://www.linkedin.com/in/mdzakihussain/" target="_blank" rel="noopener noreferrer" title="LinkedIn"
                 class="social-btn social-linkedin">
                 <i class="ri-linkedin-fill"></i>
               </a>
-              <a href="https://leetcode.com/professorx2001/" target="_blank" title="LeetCode"
+              <a href="https://leetcode.com/professorx2001/" target="_blank" rel="noopener noreferrer" title="LeetCode"
                 class="social-btn social-leetcode">
                 <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                   <path
@@ -147,7 +152,7 @@
                   </path>
                 </svg>
               </a>
-              <a href="https://github.com/professorx2001" target="_blank" title="GitHub"
+              <a href="https://github.com/professorx2001" target="_blank" rel="noopener noreferrer" title="GitHub"
                 class="social-btn social-github">
                 <i class="ri-github-fill"></i>
               </a>
@@ -162,14 +167,14 @@
             <div class="profile-glow-ring"></div>
             <div class="profile-card glass-panel">
               <div class="profile-avatar-container">
-                <img src="my.jpg" alt="Md Zaki Hussain" class="profile-img" />
+                <img src="my.jpg" alt="Md Zaki Hussain" class="profile-img" loading="lazy" />
                 <div class="status-indicator" title="Currently Active at TCS (Aegon UK)">
                   <span class="pulse-dot"></span> Active & Building
                 </div>
               </div>
 
               <div class="profile-details">
-                <h3>Md Zaki Hussain (25 yrs)</h3>
+                <h3>Md Zaki Hussain, 25 yrs.</h3>
                 <p class="role-tag"><i class="ri-cloud-line"></i> AWS Data Engineer</p>
                 <p class="company-tag"><i class="ri-building-4-line"></i> Tata Consultancy Services (TCS)</p>
                 <p class="consulting-tag"><i class="ri-global-line"></i> Consulting : Aegon UK</p>
@@ -194,7 +199,7 @@
     <!-- Work Experience Section -->
     <section id="Experience" class="section-padding experience-section">
       <div class="container">
-        <div class="section-header text-center">
+        <div class="section-header text-center reveal">
           <span class="section-tag"><i class="ri-history-line"></i> Career Journey</span>
           <h2 class="section-title">Professional Experience</h2>
           <p class="section-description">Building mission-critical, enterprise cloud data solutions at scale.</p>
@@ -202,7 +207,7 @@
 
         <div class="experience-card-wrapper">
           <!-- TCS Card -->
-          <div class="experience-card glass-panel">
+          <div class="experience-card glass-panel reveal">
             <div class="experience-card-header">
               <div class="timeline-badge">
                 <i class="ri-building-4-line"></i>
@@ -256,14 +261,14 @@
     <!-- Education Section -->
     <section id="Education" class="section-padding education-section">
       <div class="container">
-        <div class="section-header text-center">
+        <div class="section-header text-center reveal">
           <span class="section-tag"><i class="ri-graduation-cap-line"></i> Academic Background</span>
           <h2 class="section-title">Education</h2>
           <p class="section-description">Strong foundation in Computer Science & Engineering.</p>
         </div>
 
         <div class="education-card-wrapper">
-          <div class="education-card glass-panel">
+          <div class="education-card glass-panel reveal">
             <div class="education-card-header">
               <div class="timeline-badge education-badge">
                 <i class="ri-graduation-cap-line"></i>
@@ -304,7 +309,7 @@
     <!-- Featured Enterprise Projects Section -->
     <section id="Projects" class="section-padding projects-section">
       <div class="container">
-        <div class="section-header text-center">
+        <div class="section-header text-center reveal">
           <span class="section-tag"><i class="ri-folder-chart-line"></i> Impact-Driven Work</span>
           <h2 class="section-title">Featured Enterprise Projects</h2>
           <p class="section-description">Real-world production engineering challenges, architectures, and measurable
@@ -322,7 +327,7 @@
         </div>
 
         <!-- Projects Grid -->
-        <div class="projects-grid">
+        <div class="projects-grid reveal-group">
 
           <!-- Project 1 -->
           <div class="project-card glass-panel" data-category="etl serverless">
@@ -538,14 +543,14 @@
     <!-- Technical Skills & Architecture Stack Section -->
     <section id="Skills" class="section-padding skills-section">
       <div class="container">
-        <div class="section-header text-center">
+        <div class="section-header text-center reveal">
           <span class="section-tag"><i class="ri-tools-line"></i> Tech Arsenal</span>
           <h2 class="section-title">Technical Expertise & Capabilities</h2>
           <p class="section-description">Proven tools, distributed engines, and design patterns utilized in production.
           </p>
         </div>
 
-        <div class="skills-grid">
+        <div class="skills-grid reveal-group">
           <!-- Skill Category 1 -->
           <div class="skill-category-card glass-panel">
             <div class="category-header">
@@ -690,15 +695,15 @@
             </div>
 
             <div class="social-links-footer">
-              <a href="https://www.linkedin.com/in/mdzakihussain/" target="_blank" title="LinkedIn"
+              <a href="https://www.linkedin.com/in/mdzakihussain/" target="_blank" rel="noopener noreferrer" title="LinkedIn"
                 class="social-btn social-linkedin">
                 <i class="ri-linkedin-fill"></i>
               </a>
-              <a href="https://twitter.com/professorx2001" target="_blank" title="Twitter/X"
+              <a href="https://twitter.com/professorx2001" target="_blank" rel="noopener noreferrer" title="Twitter/X"
                 class="social-btn social-twitter">
                 <i class="ri-twitter-x-fill"></i>
               </a>
-              <a href="https://www.instagram.com/professorx2001/" target="_blank" title="Instagram"
+              <a href="https://www.instagram.com/professorx2001/" target="_blank" rel="noopener noreferrer" title="Instagram"
                 class="social-btn social-instagram">
                 <i class="ri-instagram-line"></i>
               </a>
@@ -707,7 +712,8 @@
 
           <!-- Form -->
           <div class="contact-form-wrapper">
-            <form id="contactForm" class="contact-form">
+            <form id="contactForm" class="contact-form" name="contact" method="POST" data-netlify="true">
+              <input type="hidden" name="form-name" value="contact" />
               <h3>Send a Message</h3>
               <div class="form-group">
                 <label for="name">Full Name *</label>
@@ -757,6 +763,62 @@
 
   <!-- Toast Notification -->
   <div id="toastNotification" class="toast-notification">✓ Email copied to clipboard!</div>
+
+  <!-- AI Chatbot Trigger & Modal Window -->
+  <button id="aiChatToggle" class="ai-chat-toggle" aria-label="Open AI Assistant" title="Ask Zaki's AI Assistant">
+    <i class="ri-sparkling-fill"></i>
+    <span class="chat-toggle-badge">AI</span>
+  </button>
+
+  <div id="aiChatModal" class="ai-chat-modal glass-panel">
+    <!-- Header -->
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-avatar">
+          <i class="ri-robot-2-line"></i>
+          <span class="online-dot"></span>
+        </div>
+        <div>
+          <h4 class="chat-title">X-Bot</h4>
+          <span class="chat-subtitle">AI Assistant</span>
+        </div>
+      </div>
+      <div class="chat-header-actions">
+        <button type="button" id="clearChatBtn" title="Clear Conversation"><i class="ri-refresh-line"></i></button>
+        <button type="button" id="closeChatBtn" title="Close Chat"><i class="ri-close-line"></i></button>
+      </div>
+    </div>
+
+    <!-- Messages Container -->
+    <div id="chatMessages" class="chat-messages">
+      <div class="chat-message bot-message">
+        <div class="msg-avatar"><i class="ri-robot-2-line"></i></div>
+        <div class="msg-content">
+          Hello! 👋 I'm Zaki's AI Assistant. Ask me anything about Md Zaki Hussain's AWS Data Engineering experience at TCS (Aegon UK), his projects, or qualifications!
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Prompts Chips -->
+    <div class="quick-prompts-wrapper">
+      <div class="quick-prompts">
+        <button type="button" class="prompt-chip" data-prompt="What is Zaki's experience at TCS?">⚡ TCS Experience</button>
+        <button type="button" class="prompt-chip" data-prompt="What is Zaki's technical stack?">🛠️ Tech Stack</button>
+        <button type="button" class="prompt-chip" data-prompt="How can I contact Zaki for hiring?">💼 Hiring Info</button>
+      </div>
+    </div>
+
+    <!-- Input Bar -->
+    <form id="chatForm" class="chat-input-bar">
+      <div class="chat-input-wrapper">
+        <input type="text" id="chatInput" placeholder="Don't ask about my crush ..." autocomplete="off" maxlength="1000" />
+        <span class="chat-char-counter" id="chatCharCounter">0 / 1000</span>
+      </div>
+      <button type="submit" id="sendChatBtn" aria-label="Send message" disabled>
+        <i class="ri-send-plane-fill"></i>
+      </button>
+    </form>
+  </div>
 
   <script type="module" src="/main.js"></script>
 </body>
