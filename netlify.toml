@@ -1,8 +1,35 @@
 [build]
   command = "npm run build"
   publish = "dist"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[functions]
+  directory = "netlify/functions"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Security Headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Force HTTPS for 2 years, include subdomains, allow HSTS preload list
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    # Blocks clickjacking (legacy browsers)
+    X-Frame-Options = "DENY"
+    # Prevents MIME-type sniffing
+    X-Content-Type-Options = "nosniff"
+    # Limits referrer info on cross-origin navigation
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Block Flash/PDF cross-domain credential requests
+    X-Permitted-Cross-Domain-Policies = "none"
+    # Lock down unused browser APIs
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+    # CSP — frame-ancestors is the modern replacement for X-Frame-Options
+    # base-uri prevents base-tag injection; form-action restricts where forms POST
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://mdzakihussainx.netlify.app; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"

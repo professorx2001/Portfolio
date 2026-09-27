@@ -2,6 +2,16 @@
 // MD ZAKI HUSSAIN - PORTFOLIO INTERACTIVE LOGIC
 // ==========================================================================
 
+/**
+ * Safely escapes a raw string for insertion via innerHTML.
+ * Prevents DOM-XSS from user-controlled input.
+ */
+function escapeHTML(str) {
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Mobile Menu Toggle Handler (No Screen Dimming)
   const mobileToggle = document.getElementById('mobile_toggle');
@@ -193,8 +203,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const formStatus = document.getElementById('formStatus');
 
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      // On localhost Netlify Forms isn't active — show a dev note instead of a false error
+      const isLocalhost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
 
       const sendBtn = document.getElementById('sendMail');
       if (sendBtn) {
@@ -202,23 +215,327 @@ document.addEventListener('DOMContentLoaded', () => {
         sendBtn.innerHTML = `<span>Sending...</span> <i class="ri-loader-4-line ri-spin"></i>`;
       }
 
-      setTimeout(() => {
+      try {
+        if (isLocalhost) {
+          // Dev environment — Netlify Forms not active, show helpful note
+          if (sendBtn) {
+            sendBtn.disabled = false;
+            sendBtn.innerHTML = `<span>Send Message</span> <i class="ri-send-plane-fill"></i>`;
+          }
+          if (formStatus) {
+            formStatus.className = 'form-status success';
+            formStatus.style.display = '';
+            formStatus.innerHTML = `ℹ️ Dev mode — form works on the deployed site. Email directly: mdzakihusain@gmail.com`;
+          }
+          return;
+        }
+
+        const formData = new FormData(contactForm);
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formData).toString(),
+        });
+
         if (sendBtn) {
           sendBtn.disabled = false;
           sendBtn.innerHTML = `<span>Send Message</span> <i class="ri-send-plane-fill"></i>`;
         }
 
-        if (formStatus) {
-          formStatus.className = 'form-status success';
-          formStatus.innerHTML = `✓ Thank you! Your message has been received. I'll get back to you shortly.`;
+        if (response.ok) {
+          if (formStatus) {
+            formStatus.className = 'form-status success';
+            formStatus.style.display = '';
+            formStatus.innerHTML = `✓ Thank you! Your message has been received. I'll get back to you shortly.`;
+          }
+          contactForm.reset();
+          setTimeout(() => {
+            if (formStatus) formStatus.style.display = 'none';
+          }, 5000);
+        } else {
+          if (formStatus) {
+            formStatus.className = 'form-status error';
+            formStatus.style.display = '';
+            formStatus.innerHTML = `✗ Something went wrong. Please email directly at mdzakihusain@gmail.com`;
+          }
         }
-
-        contactForm.reset();
-
-        setTimeout(() => {
-          if (formStatus) formStatus.style.display = 'none';
-        }, 5000);
-      }, 1200);
+      } catch (err) {
+        if (sendBtn) {
+          sendBtn.disabled = false;
+          sendBtn.innerHTML = `<span>Send Message</span> <i class="ri-send-plane-fill"></i>`;
+        }
+        if (formStatus) {
+          formStatus.className = 'form-status error';
+          formStatus.style.display = '';
+          formStatus.innerHTML = `✗ Network error. Please email directly at mdzakihusain@gmail.com`;
+        }
+      }
     });
   }
+
+  // 6. AI Chatbot Widget Logic
+  const aiChatToggle = document.getElementById('aiChatToggle');
+  const aiChatModal = document.getElementById('aiChatModal');
+  const closeChatBtn = document.getElementById('closeChatBtn');
+  const clearChatBtn = document.getElementById('clearChatBtn');
+  const chatMessages = document.getElementById('chatMessages');
+  const chatForm = document.getElementById('chatForm');
+  const chatInput = document.getElementById('chatInput');
+  const promptChips = document.querySelectorAll('.prompt-chip');
+
+  if (aiChatToggle && aiChatModal) {
+    const openChat = () => {
+      aiChatModal.classList.add('active');
+      // Auto-focus the input whenever the chat opens
+      setTimeout(() => chatInput?.focus(), 50);
+    };
+    const closeChat = () => aiChatModal.classList.remove('active');
+
+    aiChatToggle.addEventListener('click', () => {
+      aiChatModal.classList.contains('active') ? closeChat() : openChat();
+    });
+
+    // Close on X button
+    if (closeChatBtn) closeChatBtn.addEventListener('click', closeChat);
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && aiChatModal.classList.contains('active')) closeChat();
+    });
+
+    // Close when clicking outside the modal (but not on the toggle button)
+    document.addEventListener('click', (e) => {
+      if (
+        aiChatModal.classList.contains('active') &&
+        !aiChatModal.contains(e.target) &&
+        !aiChatToggle.contains(e.target)
+      ) closeChat();
+    });
+
+    let conversationHistory = [];
+
+    if (clearChatBtn) {
+      clearChatBtn.addEventListener('click', () => {
+        conversationHistory = [];
+        if (chatMessages) {
+          chatMessages.innerHTML = `
+            <div class="chat-message bot-message">
+              <div class="msg-avatar"><i class="ri-robot-2-line"></i></div>
+              <div class="msg-content">
+                Conversation reset! 👋 Ask me anything about Md Zaki Hussain's AWS Data Engineering experience at TCS (Aegon UK), his projects, or qualifications!
+              </div>
+            </div>
+          `;
+        }
+      });
+    }
+
+    if (chatMessages) {
+      chatMessages.addEventListener('click', (e) => {
+        const copyBadge = e.target.closest('.copy-email-badge');
+        if (!copyBadge) return;
+
+        const emailToCopy = copyBadge.getAttribute('data-email') || 'mdzakihusain@gmail.com';
+        navigator.clipboard.writeText(emailToCopy).then(() => {
+          const originalHTML = copyBadge.innerHTML;
+          copyBadge.innerHTML = `Copied! <i class="ri-check-line"></i>`;
+          copyBadge.classList.add('copied');
+
+          if (toast) {
+            toast.textContent = `✓ Copied ${emailToCopy} to clipboard!`;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+          }
+
+          setTimeout(() => {
+            copyBadge.innerHTML = originalHTML;
+            copyBadge.classList.remove('copied');
+          }, 2000);
+        }).catch(() => {
+          if (toast) {
+            toast.textContent = `✓ Email: ${emailToCopy}`;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+          }
+        });
+      });
+    }
+
+    const appendMessage = (sender, text) => {
+      if (!chatMessages) return;
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `chat-message ${sender}-message`;
+      msgDiv.innerHTML = `
+        <div class="msg-avatar"><i class="${sender === 'bot' ? 'ri-robot-2-line' : 'ri-user-line'}"></i></div>
+        <div class="msg-content">${text}</div>
+      `;
+      chatMessages.appendChild(msgDiv);
+
+      if (sender === 'user') {
+        // User just sent — always scroll to bottom so they see the thinking indicator
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      } else {
+        // Bot reply — scroll the TOP of the reply into view so they read from the start.
+        // This is better than scrolling to the very bottom when replies are long.
+        setTimeout(() => {
+          msgDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 30);
+      }
+    };
+
+    // Used only for the typing indicator: always scroll to show it
+    const scrollToBottom = () => {
+      if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
+    };
+
+    const handleUserQuery = async (queryText) => {
+      if (!queryText.trim()) return;
+      
+      const userMessageText = queryText.trim();
+      // Escape user input before inserting via innerHTML to prevent DOM-XSS
+      appendMessage('user', escapeHTML(userMessageText));
+      if (chatInput) chatInput.value = '';
+
+      // Show typing indicator bubble
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'chat-message bot-message typing-indicator-msg';
+      typingDiv.innerHTML = `
+        <div class="msg-avatar"><i class="ri-robot-2-line"></i></div>
+        <div class="msg-content">Thinking... <i class="ri-loader-4-line ri-spin"></i></div>
+      `;
+      chatMessages.appendChild(typingDiv);
+      scrollToBottom(); // always show the thinking bubble
+
+      try {
+        const apiEndpoint = '/.netlify/functions/chat';
+
+        const response = await fetch(apiEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: userMessageText,
+            history: conversationHistory,
+          }),
+        });
+
+        typingDiv.remove();
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        const replyText = data.reply || "I couldn't generate a response right now.";
+
+        // Format bot reply.
+        // \x01 wraps placeholders, \x02 separates URL from label inside LINK placeholders.
+        // Using \x02 (not ':') avoids collision with the colon in https://
+        let formattedReply = replyText
+          // 1. Bold markers
+          .replace(/\*\*(.*?)\*\*/g, '\x01BOLD\x01$1\x01/BOLD\x01')
+          // 2. Markdown links [label](url) → \x01LINK\x02url\x02label\x01
+          .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (_, label, url) =>
+            `\x01LINK\x02${url.replace(/[*]+$/, '')}\x02${label}\x01`
+          );
+
+        // 3 & 4: Split on placeholders → only touch plain-text segments
+        formattedReply = formattedReply
+          .split(/(\x01[^\x01]+\x01)/)
+          .map((seg, i) => {
+            if (i % 2 === 1) return seg; // placeholder — leave untouched
+            return seg
+              .replace(/(https?:\/\/[^\s<]+)/g, (url) => {
+                const clean = url.replace(/[*.,)]+$/, '');
+                return `\x01LINK\x02${clean}\x02${clean}\x01`;
+              })
+              .replace(/([a-zA-Z0-9._%+-]+@gmail\.com)/g, '\x01EMAIL\x02$1\x01');
+          })
+          .join('');
+
+        // 5. Newlines → <br>
+        formattedReply = formattedReply.replace(/\n/g, '<br/>');
+
+        // 6. Resolve placeholders into HTML
+        formattedReply = formattedReply
+          .replace(/\x01BOLD\x01(.*?)\x01\/BOLD\x01/g, '<strong>$1</strong>')
+          .replace(/\x01LINK\x02([^\x02]+)\x02([^\x01]+)\x01/g, (_, url, label) =>
+            `<a href="${url}" target="_blank" rel="noopener noreferrer" class="chat-link">${label} <i class="ri-external-link-line"></i></a>`
+          )
+          .replace(/\x01EMAIL\x02([^\x01]+)\x01/g, (_, email) =>
+            `<span class="copy-email-badge" data-email="${email}" title="Click to copy email">${email} <i class="ri-file-copy-line"></i></span>`
+          );
+
+
+
+        appendMessage('bot', formattedReply);
+
+        // Update conversation history for multi-turn context
+        conversationHistory.push({ role: 'user', content: userMessageText });
+        conversationHistory.push({ role: 'assistant', content: replyText });
+      } catch (err) {
+        typingDiv.remove();
+        console.error('Chat error:', err);
+        appendMessage(
+          'bot',
+          'Sorry, I could not reach X-Bot Backend right now.'
+        );
+      }
+    };
+
+    if (chatForm) {
+      chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (chatInput) handleUserQuery(chatInput.value);
+      });
+    }
+
+    promptChips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const promptText = chip.getAttribute('data-prompt');
+        if (promptText) handleUserQuery(promptText);
+      });
+    });
+  }
+
+  // -------------------------------------------------------------------------
+  // 7. Character counter + disabled send button for chat input
+  // -------------------------------------------------------------------------
+  const sendChatBtn = document.getElementById('sendChatBtn');
+  const charCounter = document.getElementById('chatCharCounter');
+  const MAX_CHARS = 1000;
+
+  if (chatInput && sendChatBtn) {
+    const updateChatInputState = () => {
+      const len = chatInput.value.length;
+      const trimmed = chatInput.value.trim();
+      sendChatBtn.disabled = trimmed.length === 0;
+      if (charCounter) {
+        charCounter.textContent = len + ' / ' + MAX_CHARS;
+        charCounter.className = 'chat-char-counter';
+        if (len >= MAX_CHARS) charCounter.classList.add('limit');
+        else if (len >= MAX_CHARS * 0.8) charCounter.classList.add('warn');
+      }
+    };
+    chatInput.addEventListener('input', updateChatInputState);
+    updateChatInputState();
+  }
+
+  // -------------------------------------------------------------------------
+  // 8. Scroll-reveal via IntersectionObserver
+  // -------------------------------------------------------------------------
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  document.querySelectorAll('.reveal, .reveal-group').forEach((el) => {
+    revealObserver.observe(el);
+  });
 });
