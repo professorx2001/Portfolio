@@ -36,6 +36,3 @@ venv/
 # Local Netlify folder
 .netlify
 
-# Local dev server helper
-dev_server.py
-
