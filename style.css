@@ -704,6 +704,114 @@ ul {
   color: var(--text-secondary);
 }
 
+/* Scroll Down Indicator: Downward Arrow Cue (Clean, Floating, No Box) */
+.scroll-down-indicator {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 99;
+  background: transparent;
+  border: none;
+  padding: 0;
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
+}
+
+.scroll-down-indicator:hover {
+  transform: translateX(-50%) translateY(4px);
+}
+
+.scroll-text {
+  font-size: 0.76rem;
+  font-family: var(--font-mono);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--accent-blue);
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+  transition: color var(--transition-normal);
+}
+
+.scroll-down-indicator:hover .scroll-text {
+  color: #fff;
+  text-shadow: 0 0 16px rgba(56, 189, 248, 0.9);
+}
+
+.scroll-chevron-container {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2px;
+}
+
+.chevron {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-right: 2.5px solid var(--accent-blue);
+  border-bottom: 2.5px solid var(--accent-blue);
+  transform: rotate(45deg);
+  box-shadow: 2px 2px 8px rgba(56, 189, 248, 0.4);
+  animation: chevronCascade 2s ease-in-out infinite;
+}
+
+.chevron-1 {
+  top: 0;
+  animation-delay: 0s;
+}
+
+.chevron-2 {
+  top: 6px;
+  animation-delay: 0.25s;
+}
+
+.chevron-3 {
+  top: 12px;
+  animation-delay: 0.5s;
+}
+
+.scroll-down-indicator.fade-out {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(16px);
+}
+
+@keyframes chevronCascade {
+  0% {
+    opacity: 0;
+    transform: rotate(45deg) translate(-3px, -3px);
+  }
+  40% {
+    opacity: 1;
+    transform: rotate(45deg) translate(0, 0);
+  }
+  80%, 100% {
+    opacity: 0;
+    transform: rotate(45deg) translate(3px, 3px);
+  }
+}
+
+@media (max-height: 700px), (max-width: 768px) {
+  .scroll-down-indicator {
+    bottom: max(16px, env(safe-area-inset-bottom, 16px));
+    padding: 0;
+  }
+  .scroll-text {
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+  }
+}
+
 /* --------------------------------------------------------------------------
    7. WORK EXPERIENCE & EDUCATION CARDS
    -------------------------------------------------------------------------- */
