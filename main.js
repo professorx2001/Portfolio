@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // 3. Back to Top Button visibility
+    // 3. Back to Top Button visibility & Scroll Indicator fade-out
     const backToTop = document.getElementById('backToTop');
     if (backToTop) {
       if (scrollY > 400) {
@@ -113,7 +113,39 @@ document.addEventListener('DOMContentLoaded', () => {
         backToTop.classList.remove('visible');
       }
     }
+
+    const scrollIndicator = document.getElementById('scrollDownIndicator');
+    if (scrollIndicator) {
+      if (scrollY > 60) {
+        scrollIndicator.classList.add('fade-out');
+      } else {
+        scrollIndicator.classList.remove('fade-out');
+      }
+    }
   });
+
+  // Initial check on load for scroll down indicator
+  const initialScrollIndicator = document.getElementById('scrollDownIndicator');
+  if (initialScrollIndicator && window.pageYOffset > 60) {
+    initialScrollIndicator.classList.add('fade-out');
+  }
+
+  // Smooth scroll for Scroll Down Indicator click
+  const scrollIndicatorBtn = document.getElementById('scrollDownIndicator');
+  if (scrollIndicatorBtn) {
+    scrollIndicatorBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.getElementById('Experience');
+      if (target) {
+        const headerOffset = 80;
+        const targetPos = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: targetPos,
+          behavior: 'smooth',
+        });
+      }
+    });
+  }
 
   // Back to Top action
   const backToTopBtn = document.getElementById('backToTop');
