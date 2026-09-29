@@ -2,7 +2,7 @@ import { SYSTEM_PROMPT } from './system_prompt.js';
 
 const ALLOWED_ROLES = new Set(['user', 'assistant']);
 const MAX_QUERY_LEN = 1000;
-const MAX_HISTORY_CONTENT_LEN = 2000;
+const MAX_HISTORY_CONTENT_LEN = 400; // Keep history compact to preserve token budget
 const ALLOWED_ORIGINS = ['https://mdzakihussainx.netlify.app', 'http://localhost:5173', 'http://127.0.0.1:5173'];
 
 function getCorsHeaders(origin) {
@@ -13,6 +13,22 @@ function getCorsHeaders(origin) {
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Content-Type': 'application/json',
   };
+}
+
+async function callGroqWithMessages(apiKey, messages) {
+  return await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: 'openai/gpt-oss-120b',
+      messages,
+      temperature: 0,
+      max_tokens: 500,
+    }),
+  });
 }
 
 async function processChatRequest(bodyJson) {
@@ -34,31 +50,42 @@ async function processChatRequest(bodyJson) {
     };
   }
 
+  // Build message chain with limited history
   const messages = [{ role: 'system', content: SYSTEM_PROMPT }];
 
-  const recentHistory = rawHistory.slice(-6);
+  const recentHistory = rawHistory.slice(-4); // Last 2 turns maximum
+  let hasHistory = false;
   for (const msg of recentHistory) {
     if (msg && ALLOWED_ROLES.has(msg.role)) {
       const content = String(msg.content || '').slice(0, MAX_HISTORY_CONTENT_LEN);
       messages.push({ role: msg.role, content });
+      hasHistory = true;
     }
   }
 
   messages.push({ role: 'user', content: userQuery });
 
-  const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: 'openai/gpt-oss-120b',
-      messages,
-      temperature: 0,
-      max_tokens: 500,
-    }),
-  });
+  let groqRes = await callGroqWithMessages(apiKey, messages);
+
+  // If rate-limited (429) and we had attached history, retry once without history
+  if (groqRes.status === 429 && hasHistory) {
+    console.warn('[chat.js] 429 Rate Limit hit. Retrying immediately without conversation history...');
+    const compactMessages = [
+      { role: 'system', content: SYSTEM_PROMPT },
+      { role: 'user', content: userQuery }
+    ];
+    groqRes = await callGroqWithMessages(apiKey, compactMessages);
+  }
+
+  // If still 429, inform user politely rather than failing with generic backend down error
+  if (groqRes.status === 429) {
+    return {
+      status: 200,
+      data: {
+        reply: "⏳ Whoosh, that was fast! I'm catching my breath for a few seconds on the free tier. Please ask again in 2-5 seconds!"
+      }
+    };
+  }
 
   if (!groqRes.ok) {
     const errText = await groqRes.text();
