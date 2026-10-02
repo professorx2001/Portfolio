@@ -121,6 +121,23 @@ export default async (req, context) => {
     });
   }
 
+  // Security: Block unauthorized cross-origin requests from third-party websites hotlinking this API
+  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+    return new Response(JSON.stringify({ error: 'Forbidden: Unauthorized origin' }), {
+      status: 403,
+      headers: corsHeaders,
+    });
+  }
+
+  // Security: Payload size check (prevent DoS memory exhaustion)
+  const contentLength = parseInt(req.headers.get('content-length') || '0', 10);
+  if (contentLength > 10240) {
+    return new Response(JSON.stringify({ error: 'Payload Too Large' }), {
+      status: 413,
+      headers: corsHeaders,
+    });
+  }
+
   try {
     const bodyJson = await req.json().catch(() => ({}));
     const result = await processChatRequest(bodyJson);
@@ -157,6 +174,24 @@ export const handler = async (event, context) => {
       statusCode: 405,
       headers: corsHeaders,
       body: JSON.stringify({ error: 'Method Not Allowed' }),
+    };
+  }
+
+  // Security: Block unauthorized cross-origin requests
+  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+    return {
+      statusCode: 403,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: 'Forbidden: Unauthorized origin' }),
+    };
+  }
+
+  // Security: Payload size check
+  if (event.body && event.body.length > 10240) {
+    return {
+      statusCode: 413,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: 'Payload Too Large' }),
     };
   }
 

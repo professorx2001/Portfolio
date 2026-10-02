@@ -466,10 +466,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await response.json();
         const replyText = data.reply || "I couldn't generate a response right now.";
 
-        // Format bot reply.
+        // SECURITY: Escape raw LLM text first to prevent prompt-injection DOM-XSS attacks
+        const escapedReply = escapeHTML(replyText);
+
+        // Format bot reply into safe rich HTML
         // \x01 wraps placeholders, \x02 separates URL from label inside LINK placeholders.
-        // Using \x02 (not ':') avoids collision with the colon in https://
-        let formattedReply = replyText
+        let formattedReply = escapedReply
           // 1. Bold markers
           .replace(/\*\*(.*?)\*\*/g, '\x01BOLD\x01$1\x01/BOLD\x01')
           // 2. Markdown links [label](url) → \x01LINK\x02url\x02label\x01
@@ -494,12 +496,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // 5. Newlines → <br>
         formattedReply = formattedReply.replace(/\n/g, '<br/>');
 
-        // 6. Resolve placeholders into HTML
+        // 6. Resolve placeholders into safe HTML (strictly validate URL protocol to prevent javascript: URIs)
         formattedReply = formattedReply
           .replace(/\x01BOLD\x01(.*?)\x01\/BOLD\x01/g, '<strong>$1</strong>')
-          .replace(/\x01LINK\x02([^\x02]+)\x02([^\x01]+)\x01/g, (_, url, label) =>
-            `<a href="${url}" target="_blank" rel="noopener noreferrer" class="chat-link">${label} <i class="ri-external-link-line"></i></a>`
-          )
+          .replace(/\x01LINK\x02([^\x02]+)\x02([^\x01]+)\x01/g, (_, url, label) => {
+            const safeUrl = /^https?:\/\//i.test(url) ? url : '#';
+            return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="chat-link">${label} <i class="ri-external-link-line"></i></a>`;
+          })
           .replace(/\x01EMAIL\x02([^\x01]+)\x01/g, (_, email) =>
             `<span class="copy-email-badge" data-email="${email}" title="Click to copy email">${email} <i class="ri-file-copy-line"></i></span>`
           );
