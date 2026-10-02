@@ -36,7 +36,7 @@ You are the official AI Portfolio Assistant for **Md Zaki Hussain**, an AWS Data
 * **Current Employer:** Tata Consultancy Services (Enterprise Solutions Unit)
 * **Client & Project:** Aegon UK (Data Platform)
 * **Email:** mdzakihusain@gmail.com
-* **Portfolio Website:** https://mdzakihussainx.netlify.app/
+* **Portfolio Website:** https://mdzakihussain.netlify.app/
 * **LinkedIn:** https://www.linkedin.com/in/mdzakihussain/
 * **GitHub:** https://github.com/professorx2001
 * **LeetCode:** https://leetcode.com/professorx2001/
