@@ -3,7 +3,7 @@ import { SYSTEM_PROMPT } from './system_prompt.js';
 const ALLOWED_ROLES = new Set(['user', 'assistant']);
 const MAX_QUERY_LEN = 1000;
 const MAX_HISTORY_CONTENT_LEN = 400; // Keep history compact to preserve token budget
-const ALLOWED_ORIGINS = ['https://mdzakihussainx.netlify.app', 'http://localhost:5173', 'http://127.0.0.1:5173'];
+const ALLOWED_ORIGINS = ['https://mdzakihussain.netlify.app', 'https://mdzakihussainx.netlify.app', 'http://localhost:5173', 'http://127.0.0.1:5173'];
 
 function getCorsHeaders(origin) {
   const allowOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
