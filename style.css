@@ -1488,6 +1488,12 @@ ul {
   animation: fadeSlideIn 0.3s ease forwards;
 }
 
+.form-status.show,
+.form-status.success,
+.form-status.error {
+  display: block;
+}
+
 @keyframes fadeSlideIn {
   from { opacity: 0; transform: translateY(-6px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -2220,6 +2226,7 @@ ul {
    16. FORM STATUS ERROR STATE
    -------------------------------------------------------------------------- */
 .form-status.error {
+  display: block;
   background: rgba(239, 68, 68, 0.12);
   border: 1px solid rgba(239, 68, 68, 0.4);
   color: #fca5a5;
@@ -2229,6 +2236,7 @@ ul {
 }
 
 .form-status.success {
+  display: block;
   background: rgba(16, 185, 129, 0.12);
   border: 1px solid rgba(16, 185, 129, 0.4);
   color: #6ee7b7;

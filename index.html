@@ -722,8 +722,11 @@
 
           <!-- Form -->
           <div class="contact-form-wrapper">
-            <form id="contactForm" class="contact-form" name="contact" method="POST" data-netlify="true">
+            <form id="contactForm" class="contact-form" name="contact" method="POST" action="/" data-netlify="true" netlify netlify-honeypot="bot-field">
               <input type="hidden" name="form-name" value="contact" />
+              <p style="display: none;" aria-hidden="true">
+                <label>Don’t fill this out if you're human: <input name="bot-field" tabindex="-1" /></label>
+              </p>
               <h3>Send a Message</h3>
               <div class="form-group">
                 <label for="name">Full Name *</label>

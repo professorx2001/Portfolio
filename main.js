@@ -255,14 +255,18 @@ document.addEventListener('DOMContentLoaded', () => {
             sendBtn.innerHTML = `<span>Send Message</span> <i class="ri-send-plane-fill"></i>`;
           }
           if (formStatus) {
-            formStatus.className = 'form-status success';
-            formStatus.style.display = '';
-            formStatus.innerHTML = `ℹ️ Dev mode — form works on the deployed site. Email directly: mdzakihusain@gmail.com`;
+            formStatus.className = 'form-status success show';
+            formStatus.style.display = 'block';
+            formStatus.innerHTML = `ℹ️ Dev mode: Form markup verified! On the deployed Netlify site, your message will submit directly to Netlify Forms.`;
           }
           return;
         }
 
         const formData = new FormData(contactForm);
+        if (!formData.get('form-name')) {
+          formData.append('form-name', 'contact');
+        }
+
         const response = await fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -276,19 +280,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (response.ok) {
           if (formStatus) {
-            formStatus.className = 'form-status success';
-            formStatus.style.display = '';
-            formStatus.innerHTML = `✓ Thank you! Your message has been received. I'll get back to you shortly.`;
+            formStatus.className = 'form-status success show';
+            formStatus.style.display = 'block';
+            formStatus.innerHTML = `✓ Thank you! Your message has been sent successfully. I'll get back to you shortly.`;
           }
           contactForm.reset();
           setTimeout(() => {
-            if (formStatus) formStatus.style.display = 'none';
-          }, 5000);
+            if (formStatus) {
+              formStatus.style.display = 'none';
+              formStatus.className = 'form-status';
+            }
+          }, 6000);
         } else {
           if (formStatus) {
-            formStatus.className = 'form-status error';
-            formStatus.style.display = '';
-            formStatus.innerHTML = `✗ Something went wrong. Please email directly at mdzakihusain@gmail.com`;
+            formStatus.className = 'form-status error show';
+            formStatus.style.display = 'block';
+            formStatus.innerHTML = `✗ Unable to submit (${response.status}). Please email directly at <a href="mailto:mdzakihusain@gmail.com" style="color: #67e8f9; text-decoration: underline;">mdzakihusain@gmail.com</a>`;
           }
         }
       } catch (err) {
@@ -297,9 +304,9 @@ document.addEventListener('DOMContentLoaded', () => {
           sendBtn.innerHTML = `<span>Send Message</span> <i class="ri-send-plane-fill"></i>`;
         }
         if (formStatus) {
-          formStatus.className = 'form-status error';
-          formStatus.style.display = '';
-          formStatus.innerHTML = `✗ Network error. Please email directly at mdzakihusain@gmail.com`;
+          formStatus.className = 'form-status error show';
+          formStatus.style.display = 'block';
+          formStatus.innerHTML = `✗ Network error. Please email directly at <a href="mailto:mdzakihusain@gmail.com" style="color: #67e8f9; text-decoration: underline;">mdzakihusain@gmail.com</a>`;
         }
       }
     });
