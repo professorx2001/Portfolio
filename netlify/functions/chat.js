@@ -3,7 +3,63 @@ import { SYSTEM_PROMPT } from './system_prompt.js';
 const ALLOWED_ROLES = new Set(['user', 'assistant']);
 const MAX_QUERY_LEN = 1000;
 const MAX_HISTORY_CONTENT_LEN = 400; // Keep history compact to preserve token budget
-const ALLOWED_ORIGINS = ['https://mdzakihussain.netlify.app', 'https://mdzakihussainx.netlify.app', 'http://localhost:5173', 'http://127.0.0.1:5173'];
+
+// Security: Only permit localhost origins during local development.
+// When deployed on Netlify in the cloud (NETLIFY=true), strictly restrict to the production domain.
+const isLocalDev = !process.env.NETLIFY || process.env.NETLIFY_DEV === 'true';
+
+const ALLOWED_ORIGINS = isLocalDev
+  ? ['https://mdzakihussain.netlify.app', 'http://localhost:5173', 'http://127.0.0.1:5173']
+  : ['https://mdzakihussain.netlify.app'];
+
+// Security: IP-based Sliding Window Rate Limiter
+// Prevents automated scripts / headless bots from draining the Groq TPM & daily token quota.
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+const MAX_REQUESTS_PER_WINDOW = 10;     // Max 10 requests per minute per IP
+const MAX_TRACKED_IPS = 2000;           // Prevent unbounded memory retention
+const ipRequestHistory = new Map();
+
+function getClientIp(req) {
+  return (
+    req.headers.get('x-nf-client-connection-ip') ||
+    req.headers.get('client-ip') ||
+    req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+    '127.0.0.1'
+  );
+}
+
+function checkRateLimit(ip) {
+  // Allow unrestricted calls during local development
+  if (isLocalDev && (ip === '127.0.0.1' || ip === 'localhost' || ip === '::1')) {
+    return { allowed: true };
+  }
+
+  const now = Date.now();
+  const timestamps = ipRequestHistory.get(ip) || [];
+
+  // Filter timestamps within the current sliding window
+  const activeTimestamps = timestamps.filter((ts) => now - ts < RATE_LIMIT_WINDOW_MS);
+
+  if (activeTimestamps.length >= MAX_REQUESTS_PER_WINDOW) {
+    const oldestTimestamp = activeTimestamps[0];
+    const retryAfterSeconds = Math.max(1, Math.ceil((oldestTimestamp + RATE_LIMIT_WINDOW_MS - now) / 1000));
+    return { allowed: false, retryAfterSeconds };
+  }
+
+  activeTimestamps.push(now);
+  ipRequestHistory.set(ip, activeTimestamps);
+
+  // Evict expired entries if tracking map exceeds cap
+  if (ipRequestHistory.size > MAX_TRACKED_IPS) {
+    for (const [trackedIp, list] of ipRequestHistory.entries()) {
+      if (!list.some((ts) => now - ts < RATE_LIMIT_WINDOW_MS)) {
+        ipRequestHistory.delete(trackedIp);
+      }
+    }
+  }
+
+  return { allowed: true };
+}
 
 function getCorsHeaders(origin) {
   const allowOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
@@ -121,12 +177,49 @@ export default async (req, context) => {
     });
   }
 
-  // Security: Block unauthorized cross-origin requests from third-party websites hotlinking this API
-  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+  // Security: Origin verification
+  // In production, block headless scripts that omit origin and reject foreign websites
+  const referer = req.headers.get('referer') || '';
+  let requestSource = origin;
+  if (!requestSource && referer) {
+    try {
+      requestSource = new URL(referer).origin;
+    } catch {
+      // Invalid URL format in referer header
+    }
+  }
+
+  if (!isLocalDev) {
+    if (!requestSource || !ALLOWED_ORIGINS.includes(requestSource)) {
+      return new Response(JSON.stringify({ error: 'Forbidden: Unauthorized or missing origin' }), {
+        status: 403,
+        headers: corsHeaders,
+      });
+    }
+  } else if (origin && !ALLOWED_ORIGINS.includes(origin)) {
     return new Response(JSON.stringify({ error: 'Forbidden: Unauthorized origin' }), {
       status: 403,
       headers: corsHeaders,
     });
+  }
+
+  // Security: IP-based sliding window rate limiter
+  const clientIp = getClientIp(req);
+  const rateLimitResult = checkRateLimit(clientIp);
+  if (!rateLimitResult.allowed) {
+    return new Response(
+      JSON.stringify({
+        reply: "⏳ You're sending messages a bit too fast! Please wait a moment before asking again.",
+        error: 'Too Many Requests',
+      }),
+      {
+        status: 429,
+        headers: {
+          ...corsHeaders,
+          'Retry-After': String(rateLimitResult.retryAfterSeconds),
+        },
+      }
+    );
   }
 
   // Security: Payload size check (prevent DoS memory exhaustion)
@@ -154,64 +247,3 @@ export default async (req, context) => {
   }
 };
 
-// Netlify Functions v1 / AWS Lambda handler for backwards compatibility
-export const handler = async (event, context) => {
-  const origin = event.headers?.origin || event.headers?.Origin || '';
-  const corsHeaders = getCorsHeaders(origin);
-
-  const httpMethod = event.httpMethod || 'POST';
-
-  if (httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers: corsHeaders,
-      body: '',
-    };
-  }
-
-  if (httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Method Not Allowed' }),
-    };
-  }
-
-  // Security: Block unauthorized cross-origin requests
-  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
-    return {
-      statusCode: 403,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Forbidden: Unauthorized origin' }),
-    };
-  }
-
-  // Security: Payload size check
-  if (event.body && event.body.length > 10240) {
-    return {
-      statusCode: 413,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: 'Payload Too Large' }),
-    };
-  }
-
-  try {
-    let bodyJson = {};
-    if (event.body) {
-      bodyJson = JSON.parse(event.body);
-    }
-    const result = await processChatRequest(bodyJson);
-    return {
-      statusCode: result.status,
-      headers: corsHeaders,
-      body: JSON.stringify(result.data),
-    };
-  } catch (err) {
-    console.error('[chat.js Handler Error]', err);
-    return {
-      statusCode: 500,
-      headers: corsHeaders,
-      body: JSON.stringify({ reply: '⚠️ Something went wrong. Please try again later.' }),
-    };
-  }
-};
